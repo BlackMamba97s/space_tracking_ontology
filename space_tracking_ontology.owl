@@ -9,6 +9,33 @@
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> rdf:type owl:Ontology .
 
 #################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center
+:Has_Orbit_Center rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :Orbits_Around ;
+                  rdfs:domain :Astronomical_Object ,
+                              :Satellite ;
+                  rdfs:range :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
+:Orbited_By rdf:type owl:ObjectProperty ;
+            owl:inverseOf :Orbits_Around ;
+            rdfs:domain :Astronomical_Object ;
+            rdfs:range :Astronomical_Object ,
+                       :Satellite .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around
+:Orbits_Around rdf:type owl:ObjectProperty ;
+               rdfs:domain :Astronomical_Object ;
+               rdfs:range :Astronomical_Object ,
+                          :Satellite .
+
+
+#################################################################
 #    Classes
 #################################################################
 
