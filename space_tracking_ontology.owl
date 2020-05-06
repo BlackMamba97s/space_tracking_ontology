@@ -19,7 +19,8 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Artificial_Satellite
 :Artificial_Satellite rdf:type owl:Class ;
-                      rdfs:subClassOf :Satellite .
+                      rdfs:subClassOf :Satellite ;
+                      owl:disjointWith :Natural_Satellite .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Asteroid
@@ -29,6 +30,11 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object
 :Astronomical_Object rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Black_Hole
+:Black_Hole rdf:type owl:Class ;
+            rdfs:subClassOf :Star .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Comet
@@ -91,6 +97,11 @@
         rdfs:subClassOf :Astronomical_Object .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pulsar
+:Pulsar rdf:type owl:Class ;
+        rdfs:subClassOf :Star .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite
 :Satellite rdf:type owl:Class .
 
@@ -110,9 +121,23 @@
                     rdfs:subClassOf :Planet .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#White_Dwarf
+:White_Dwarf rdf:type owl:Class ;
+             rdfs:subClassOf :Star .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Yellow_Dwarf
+:Yellow_Dwarf rdf:type owl:Class ;
+              rdfs:subClassOf :Star .
+
+
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite_G_Demo
+:Satellite_G_Demo rdf:type owl:NamedIndividual .
+
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
 :Solo rdf:type owl:NamedIndividual ,
@@ -122,6 +147,15 @@
 #################################################################
 #    General axioms
 #################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Areocentric
+                :Geocentric
+                :Heliocentric
+                :Lunar
+              )
+] .
+
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Asteroid
