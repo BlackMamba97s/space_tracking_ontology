@@ -1,19 +1,137 @@
-@prefix : <http://www.semanticweb.org/daniele/ontologies/2020/4/untitled-ontology-6#> .
+@prefix : <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/daniele/ontologies/2020/4/untitled-ontology-6> .
+@base <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> .
 
-<http://www.semanticweb.org/daniele/ontologies/2020/4/untitled-ontology-6> rdf:type owl:Ontology .
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> rdf:type owl:Ontology .
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/untitled-ontology-6#Astronomical_Object
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Areocentric
+:Areocentric rdf:type owl:Class ;
+             rdfs:subClassOf :Orbiter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Artificial_Satellite
+:Artificial_Satellite rdf:type owl:Class ;
+                      rdfs:subClassOf :Satellite .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Asteroid
+:Asteroid rdf:type owl:Class ;
+          rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object
 :Astronomical_Object rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Comet
+:Comet rdf:type owl:Class ;
+       rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dwarf_Planet
+:Dwarf_Planet rdf:type owl:Class ;
+              rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Geocentric
+:Geocentric rdf:type owl:Class ;
+            rdfs:subClassOf :Orbiter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Giant_Planet
+:Giant_Planet rdf:type owl:Class ;
+              rdfs:subClassOf :Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable_Planet
+:Habitable_Planet rdf:type owl:Class ;
+                  rdfs:subClassOf :Solar_System_Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Heliocentric
+:Heliocentric rdf:type owl:Class ;
+              rdfs:subClassOf :Orbiter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inhabitable_Planet
+:Inhabitable_Planet rdf:type owl:Class ;
+                    rdfs:subClassOf :Solar_System_Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lonely_Object
+:Lonely_Object rdf:type owl:Class ;
+               rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lunar
+:Lunar rdf:type owl:Class ;
+       rdfs:subClassOf :Orbiter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
+:Natural_Satellite rdf:type owl:Class ;
+                   rdfs:subClassOf :Astronomical_Object ,
+                                   :Satellite .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter
+:Orbiter rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
+:Planet rdf:type owl:Class ;
+        rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite
+:Satellite rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
+:Solar_System_Planet rdf:type owl:Class ;
+                     rdfs:subClassOf :Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
+:Star rdf:type owl:Class ;
+      rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestrial_Planet
+:Terrestrial_Planet rdf:type owl:Class ;
+                    rdfs:subClassOf :Planet .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
+:Solo rdf:type owl:NamedIndividual ,
+               :Planet .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Asteroid
+                :Comet
+                :Dwarf_Planet
+                :Natural_Satellite
+                :Planet
+                :Star
+              )
+] .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
