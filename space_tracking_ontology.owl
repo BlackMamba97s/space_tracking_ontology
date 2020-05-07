@@ -12,6 +12,12 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Abitability
+:Has_Abitability rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:range :Habitability_Partition .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center
 :Has_Orbit_Center rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :Orbits_Around ;
@@ -76,7 +82,8 @@
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbital_Parameter
-:Orbital_Parameter rdf:type owl:DatatypeProperty .
+:Orbital_Parameter rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Orbiter .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
@@ -85,7 +92,8 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Semimajor_Axis
 :Semimajor_Axis rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf :Orbital_Parameter .
+                rdfs:subPropertyOf :Orbital_Parameter ;
+                rdfs:range xsd:double .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#True_Anomaly
@@ -99,6 +107,17 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Areocentric
 :Areocentric rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :Has_Orbit_Center ;
+                                   owl:someValuesFrom [ owl:intersectionOf ( :Planet
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :Name ;
+                                                                               owl:hasValue "Mars"
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ]
+                                 ] ;
              rdfs:subClassOf :Orbiter .
 
 
@@ -134,12 +153,33 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Geocentric
 :Geocentric rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                  owl:onProperty :Has_Orbit_Center ;
+                                  owl:someValuesFrom [ owl:intersectionOf ( :Planet
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :Name ;
+                                                                              owl:hasValue "Earth"
+                                                                            ]
+                                                                          ) ;
+                                                       rdf:type owl:Class
+                                                     ]
+                                ] ;
             rdfs:subClassOf :Orbiter .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Giant_Planet
 :Giant_Planet rdf:type owl:Class ;
               rdfs:subClassOf :Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitability_Partition
+:Habitability_Partition rdf:type owl:Class ;
+                        rdfs:subClassOf :ValuePartition .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable
+:Habitable rdf:type owl:Class ;
+           rdfs:subClassOf :Habitability_Partition .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable_Planet
@@ -149,6 +189,17 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Heliocentric
 :Heliocentric rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty :Has_Orbit_Center ;
+                                    owl:someValuesFrom [ owl:intersectionOf ( :Star
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :Name ;
+                                                                                owl:hasValue "Sun"
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ]
+                                  ] ;
               rdfs:subClassOf :Orbiter .
 
 
@@ -164,6 +215,17 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lunar
 :Lunar rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :Has_Orbit_Center ;
+                             owl:someValuesFrom [ owl:intersectionOf ( :Natural_Satellite
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty :Name ;
+                                                                         owl:hasValue "Moon"
+                                                                       ]
+                                                                     ) ;
+                                                  rdf:type owl:Class
+                                                ]
+                           ] ;
        rdfs:subClassOf :Orbiter .
 
 
@@ -173,6 +235,11 @@
                                    :Satellite .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Not_Habitable
+:Not_Habitable rdf:type owl:Class ;
+               rdfs:subClassOf :Habitability_Partition .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter
 :Orbiter rdf:type owl:Class .
 
@@ -180,6 +247,16 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
 :Planet rdf:type owl:Class ;
         rdfs:subClassOf :Astronomical_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Possibly_Habitable
+:Possibly_Habitable rdf:type owl:Class ;
+                    rdfs:subClassOf :Habitability_Partition .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Possibly_Habitable_Planet
+:Possibly_Habitable_Planet rdf:type owl:Class ;
+                           rdfs:subClassOf :Solar_System_Planet .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pulsar
@@ -193,6 +270,17 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
 :Solar_System_Planet rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Class ;
+                                           owl:oneOf ( :Earth
+                                                       :Jupiter
+                                                       :Mars
+                                                       :Mercury
+                                                       :Neptune
+                                                       :Saturn
+                                                       :Uranus
+                                                       :Venus
+                                                     )
+                                         ] ;
                      rdfs:subClassOf :Planet .
 
 
@@ -204,6 +292,10 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestrial_Planet
 :Terrestrial_Planet rdf:type owl:Class ;
                     rdfs:subClassOf :Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ValuePartition
+:ValuePartition rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#White_Dwarf
@@ -220,15 +312,69 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth
+:Earth rdf:type owl:NamedIndividual ;
+       :Semimajor_Axis "1.496E8"^^xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#International_Space_Station
+:International_Space_Station rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter
+:Jupiter rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MRO
+:MRO rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars
+:Mars rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mercury
+:Mercury rdf:type owl:NamedIndividual ;
+         :Semimajor_Axis "5.7909048E7"^^xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
+:Moon rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
+:Neptune rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos
+:Phobos rdf:type owl:NamedIndividual .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite_G_Demo
 :Satellite_G_Demo rdf:type owl:NamedIndividual ,
                            :Natural_Satellite ;
                   :Name "Giuseppina Barbara Demo" .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn
+:Saturn rdf:type owl:NamedIndividual .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
 :Solo rdf:type owl:NamedIndividual ,
                :Planet .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
+:Sun rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus
+:Uranus rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Venus
+:Venus rdf:type owl:NamedIndividual .
 
 
 #################################################################
@@ -251,6 +397,31 @@
                 :Natural_Satellite
                 :Planet
                 :Star
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Black_Hole
+                :Pulsar
+                :White_Dwarf
+                :Yellow_Dwarf
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Habitable
+                :Not_Habitable
+                :Possibly_Habitable
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Habitable_Planet
+                :Inhabitable_Planet
+                :Possibly_Habitable_Planet
               )
 ] .
 
