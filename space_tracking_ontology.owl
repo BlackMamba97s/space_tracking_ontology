@@ -36,6 +36,64 @@
 
 
 #################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis
+:Argument_Of_Periapsis rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :Orbital_Parameter ;
+                       rdfs:range xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity
+:Eccentricity rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :Orbital_Parameter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inclination
+:Inclination rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :Orbital_Parameter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Longitude_Of_The_Ascending_Node
+:Longitude_Of_The_Ascending_Node rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf :Orbital_Parameter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mass
+:Mass rdf:type owl:DatatypeProperty ;
+      rdfs:range [ rdf:type rdfs:Datatype ;
+                   owl:onDatatype xsd:double ;
+                   owl:withRestrictions ( [ xsd:minExclusive "0.0"^^xsd:double
+                                          ]
+                                        )
+                 ] .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name
+:Name rdf:type owl:DatatypeProperty ;
+      rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbital_Parameter
+:Orbital_Parameter rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
+:Radius rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Semimajor_Axis
+:Semimajor_Axis rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :Orbital_Parameter .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#True_Anomaly
+:True_Anomaly rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :Orbital_Parameter .
+
+
+#################################################################
 #    Classes
 #################################################################
 
@@ -163,7 +221,9 @@
 #################################################################
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite_G_Demo
-:Satellite_G_Demo rdf:type owl:NamedIndividual .
+:Satellite_G_Demo rdf:type owl:NamedIndividual ,
+                           :Natural_Satellite ;
+                  :Name "Giuseppina Barbara Demo" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
