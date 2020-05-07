@@ -12,12 +12,6 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Abitability
-:Has_Abitability rdf:type owl:ObjectProperty ,
-                          owl:FunctionalProperty ;
-                 rdfs:range :Habitability_Partition .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center
 :Has_Orbit_Center rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :Orbits_Around ;
@@ -172,18 +166,23 @@
               rdfs:subClassOf :Planet .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitability_Partition
-:Habitability_Partition rdf:type owl:Class ;
-                        rdfs:subClassOf :ValuePartition .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable
-:Habitable rdf:type owl:Class ;
-           rdfs:subClassOf :Habitability_Partition .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable_Planet
 :Habitable_Planet rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Solar_System_Planet
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :Semimajor_Axis ;
+                                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                    owl:onDatatype xsd:double ;
+                                                                                    owl:withRestrictions ( [ xsd:minInclusive "1.42117977E8"^^xsd:double
+                                                                                                           ]
+                                                                                                           [ xsd:maxInclusive "2.0495E8"^^xsd:double
+                                                                                                           ]
+                                                                                                         )
+                                                                                  ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
                   rdfs:subClassOf :Solar_System_Planet .
 
 
@@ -235,11 +234,6 @@
                                    :Satellite .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Not_Habitable
-:Not_Habitable rdf:type owl:Class ;
-               rdfs:subClassOf :Habitability_Partition .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter
 :Orbiter rdf:type owl:Class .
 
@@ -247,16 +241,6 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
 :Planet rdf:type owl:Class ;
         rdfs:subClassOf :Astronomical_Object .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Possibly_Habitable
-:Possibly_Habitable rdf:type owl:Class ;
-                    rdfs:subClassOf :Habitability_Partition .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Possibly_Habitable_Planet
-:Possibly_Habitable_Planet rdf:type owl:Class ;
-                           rdfs:subClassOf :Solar_System_Planet .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pulsar
@@ -281,7 +265,10 @@
                                                        :Venus
                                                      )
                                          ] ;
-                     rdfs:subClassOf :Planet .
+                     rdfs:subClassOf :Planet ;
+                     owl:disjointUnionOf ( :Habitable_Planet
+                                           :Inhabitable_Planet
+                                         ) .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
@@ -292,10 +279,6 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestrial_Planet
 :Terrestrial_Planet rdf:type owl:Class ;
                     rdfs:subClassOf :Planet .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ValuePartition
-:ValuePartition rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#White_Dwarf
@@ -406,22 +389,6 @@
                 :Pulsar
                 :White_Dwarf
                 :Yellow_Dwarf
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Habitable
-                :Not_Habitable
-                :Possibly_Habitable
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Habitable_Planet
-                :Inhabitable_Planet
-                :Possibly_Habitable_Planet
               )
 ] .
 
