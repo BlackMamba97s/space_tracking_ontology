@@ -118,7 +118,11 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Artificial_Satellite
 :Artificial_Satellite rdf:type owl:Class ;
                       rdfs:subClassOf :Satellite ;
-                      owl:disjointWith :Natural_Satellite .
+                      owl:disjointWith :Natural_Satellite ;
+                      rdfs:comment "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@it ;
+                      rdfs:label "Artificial Satellite"@en ,
+                                 "Satellite Artificiale"@it ;
+                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Satellite"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Asteroid
@@ -204,6 +208,31 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inhabitable_Planet
 :Inhabitable_Planet rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Class ;
+                                          owl:unionOf ( [ owl:intersectionOf ( :Solar_System_Planet
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :Semimajor_Axis ;
+                                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                                      owl:onDatatype xsd:double ;
+                                                                                                      owl:withRestrictions ( [ xsd:maxInclusive "1.42117977E8"^^xsd:double
+                                                                                                                             ]
+                                                                                                                           )
+                                                                                                    ]
+                                                                               ]
+                                                                             ) ;
+                                                          rdf:type owl:Class
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :Semimajor_Axis ;
+                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                               owl:onDatatype xsd:double ;
+                                                                               owl:withRestrictions ( [ xsd:minInclusive "2.0495E8"^^xsd:double
+                                                                                                      ]
+                                                                                                    )
+                                                                             ]
+                                                        ]
+                                                      )
+                                        ] ;
                     rdfs:subClassOf :Solar_System_Planet .
 
 
@@ -231,11 +260,19 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
 :Natural_Satellite rdf:type owl:Class ;
                    rdfs:subClassOf :Astronomical_Object ,
-                                   :Satellite .
+                                   :Satellite ;
+                   rdfs:comment "A Naturale Satellite is an astronomical body that orbits a planet or minor planet"@en ;
+                   rdfs:label "Natural Satellite"@en ,
+                              "Satellite Naturale"@en ;
+                   rdfs:seeAlso "https://en.wikipedia.org/wiki/Natural_satellite"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter
-:Orbiter rdf:type owl:Class .
+:Orbiter rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty :Has_Orbit_Center ;
+                               owl:someValuesFrom :Astronomical_Object
+                             ] .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
@@ -249,7 +286,10 @@
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite
-:Satellite rdf:type owl:Class .
+:Satellite rdf:type owl:Class ;
+           rdfs:comment "A Naturale Satellite is an astronomical body that orbits a planet or minor planet"@en ;
+           rdfs:label "Satellite"@en ,
+                      "Satellite"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
@@ -298,7 +338,9 @@
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#International_Space_Station
-:International_Space_Station rdf:type owl:NamedIndividual .
+:International_Space_Station rdf:type owl:NamedIndividual ,
+                                      :Astronomical_Object ;
+                             :Mass "1.0"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter
@@ -332,7 +374,7 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite_G_Demo
 :Satellite_G_Demo rdf:type owl:NamedIndividual ,
-                           :Natural_Satellite ;
+                           :Astronomical_Object ;
                   :Name "Giuseppina Barbara Demo" .
 
 
@@ -381,7 +423,13 @@
 ] .
 
 
-[ rdf:type owl:DisjointUnion ( :Solar_System_Planet :Habitable_Planet :Inhabitable_Planet )] .
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Black_Hole
+                :Pulsar
+                :White_Dwarf
+                :Yellow_Dwarf
+              )
+] .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
