@@ -89,11 +89,11 @@ dcterms:modified rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/vocab/vann#preferredNameSpacePrefix
-<http://purl.org/vocab/vann#preferredNameSpacePrefix> rdf:type owl:AnnotationProperty .
+vann:preferredNameSpacePrefix rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/vocab/vann#preferredNameSpaceURI
-<http://purl.org/vocab/vann#preferredNameSpaceURI> rdf:type owl:AnnotationProperty .
+vann:preferredNameSpaceURI rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#physicsSymbol
@@ -121,11 +121,6 @@ skos:note rdf:type owl:AnnotationProperty .
                                                         )
                                  ] .
 
-
-###  http://www.w3.org/2001/XMLSchema#date
-xsd:date rdf:type rdfs:Datatype .
-
-
 #################################################################
 #    Object Properties
 #################################################################
@@ -135,7 +130,9 @@ xsd:date rdf:type rdfs:Datatype .
                   rdfs:subPropertyOf :Orbits_Around ;
                   rdfs:domain :Astronomical_Object ,
                               :Satellite ;
-                  rdfs:range :Astronomical_Object .
+                  rdfs:range :Astronomical_Object ;
+                  rdfs:label "Has Orbit Center"@en ,
+                             "Ha centro orbitale"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
@@ -143,14 +140,19 @@ xsd:date rdf:type rdfs:Datatype .
             owl:inverseOf :Orbits_Around ;
             rdfs:domain :Astronomical_Object ;
             rdfs:range :Astronomical_Object ,
-                       :Satellite .
+                       :Satellite ;
+            rdfs:label "Orbitato da"@it ,
+                       "Orbited By"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around
 :Orbits_Around rdf:type owl:ObjectProperty ;
                rdfs:domain :Astronomical_Object ;
                rdfs:range :Astronomical_Object ,
-                          :Satellite .
+                          :Satellite ;
+               rdfs:label "Orbita Intorno"@it ,
+                          "Orbits Around"@en .
+
 
 
 #################################################################
@@ -160,22 +162,35 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis
 :Argument_Of_Periapsis rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf :Orbital_Parameter ;
-                       rdfs:range xsd:double .
+                       rdfs:range xsd:double ;
+                       :physicsSymbol "ω"^^:greekLetter ;
+                       rdfs:comment "defines the orientation of the ellipse in the orbital plane, as an angle measured from the ascending node to the periapsis"@en ;
+                       rdfs:label "Argument of Periapsis"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity
 :Eccentricity rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :Orbital_Parameter .
-
+              rdfs:subPropertyOf :Orbital_Parameter ;
+              rdfs:range xsd:double ;
+              rdfs:label "Eccentricity"@en ;
+              :physicsSymbol "e"^^xsd:string .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inclination
 :Inclination rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :Orbital_Parameter .
-
+             rdfs:subPropertyOf :Orbital_Parameter ;
+             rdfs:range xsd:double ;
+             rdfs:comment "Vertical tilt of the ellipse with respect to the reference plane, measured at the ascending node according to a reference plane"@en ;
+             rdfs:label "Inclination"@en ;
+             :physicsSymbol "i"^^xsd:string .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Longitude_Of_The_Ascending_Node
 :Longitude_Of_The_Ascending_Node rdf:type owl:DatatypeProperty ;
-                                 rdfs:subPropertyOf :Orbital_Parameter .
+                                 rdfs:subPropertyOf :Orbital_Parameter ;
+                                 rdfs:range xsd:double ;
+                                 rdfs:comment "horizontally orients the ascending node of the ellipse"@en ;
+                                 rdfs:label "Longitude of the ascending node"@en ;
+                                 :physicsSymbol "Ω"^^:greekLetter .
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mass
@@ -185,17 +200,28 @@ xsd:date rdf:type rdfs:Datatype .
                    owl:withRestrictions ( [ xsd:minExclusive "0.0"^^xsd:double
                                           ]
                                         )
-                 ] .
+                 ] ;
+      rdfs:comment "The mass of a thing expressed in Kg"@en ;
+      rdfs:label "Mass"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name
 :Name rdf:type owl:DatatypeProperty ;
-      rdfs:range xsd:string .
+      rdfs:range xsd:string ;
+       rdfs:comment "The attribute that identifies the name of an object"@en ;
+       rdfs:label "Name"@en .
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbital_Parameter
 :Orbital_Parameter rdf:type owl:DatatypeProperty ;
-                   rdfs:domain :Orbiter .
+                   rdfs:domain :Orbiter ;
+                   rdfs:range xsd:double ;
+                   rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
+                   rdfs:label "Semimajor Axis"@en ;
+                   :physicsSymbol "a"^^xsd:string .
+
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
@@ -205,12 +231,22 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Semimajor_Axis
 :Semimajor_Axis rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf :Orbital_Parameter ;
-                rdfs:range xsd:double .
+                rdfs:range xsd:double ;
+                rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
+                rdfs:label "Semimajor Axis"@en ;
+                :physicsSymbol "a"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#True_Anomaly
 :True_Anomaly rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :Orbital_Parameter .
+              rdfs:subPropertyOf :Orbital_Parameter ;
+              rdfs:range xsd:double ;
+              :physicsSymbol "f"^^xsd:string ,
+                             "θ"^^:greekLetter ,
+                             "ν"^^xsd:string ;
+              rdfs:comment "defines the position of the orbiting body along the ellipse at a specific time"@en ;
+              rdfs:label "True Anomaly"@en .
+
 
 
 #################################################################
