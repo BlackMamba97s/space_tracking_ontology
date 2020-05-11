@@ -177,7 +177,7 @@
                                                                owl:onProperty :Semimajor_Axis ;
                                                                owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                                     owl:onDatatype xsd:double ;
-                                                                                    owl:withRestrictions ( [ xsd:minInclusive "0,949999998897"^^xsd:double
+                                                                                    owl:withRestrictions ( [ xsd:minInclusive "0.949999998897"^^xsd:double
                                                                                                            ]
                                                                                                            [ xsd:maxInclusive "1.37000613071"^^xsd:double
                                                                                                            ]
@@ -214,7 +214,7 @@
                                                                                  owl:onProperty :Semimajor_Axis ;
                                                                                  owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                                                       owl:onDatatype xsd:double ;
-                                                                                                      owl:withRestrictions ( [ xsd:maxInclusive "0,949999998897"^^xsd:double
+                                                                                                      owl:withRestrictions ( [ xsd:maxInclusive "0.949999998897"^^xsd:double
                                                                                                                              ]
                                                                                                                            )
                                                                                                     ]
@@ -294,6 +294,17 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
 :Solar_System_Planet rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Class ;
+                                           owl:oneOf ( :Earth
+                                                       :Jupiter
+                                                       :Mars
+                                                       :Mercury
+                                                       :Neptune
+                                                       :Saturn
+                                                       :Uranus
+                                                       :Venus
+                                                     )
+                                         ] ;
                      rdfs:subClassOf :Planet .
 
 
@@ -321,16 +332,76 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth
+:Earth rdf:type owl:NamedIndividual ;
+       :Has_Orbit_Center :Sun ;
+       :Argument_Of_Periapsis "102.9376819"^^xsd:double ;
+       :Eccentricity "0.01671123"^^xsd:double ;
+       :Inclination "-1.531E-5"^^xsd:double ;
+       :Longitude_Of_The_Ascending_Node "0.0"^^xsd:double ;
+       :Semimajor_Axis "1.00000261"^^xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter
+:Jupiter rdf:type owl:NamedIndividual ;
+         :Has_Orbit_Center :Sun ;
+         :Argument_Of_Periapsis "14.72847983"^^xsd:double ;
+         :Eccentricity "0.04838624"^^xsd:double ;
+         :Inclination "1.30439695"^^xsd:double ;
+         :Longitude_Of_The_Ascending_Node "100.4739091"^^xsd:double ;
+         :Semimajor_Axis "5.202887"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MRO
 :MRO rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars
+:Mars rdf:type owl:NamedIndividual ;
+      :Has_Orbit_Center :Sun ;
+      :Argument_Of_Periapsis "-23.94362959"^^xsd:double ;
+      :Eccentricity "0.0933941"^^xsd:double ;
+      :Inclination "1.84969142"^^xsd:double ;
+      :Longitude_Of_The_Ascending_Node "49.55953891"^^xsd:double ;
+      :Semimajor_Axis "1.52371034"^^xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mercury
+:Mercury rdf:type owl:NamedIndividual ;
+         :Has_Orbit_Center :Sun ;
+         :Argument_Of_Periapsis "77.45779628"^^xsd:double ;
+         :Eccentricity "0.20563593"^^xsd:double ;
+         :Inclination "7.00497902"^^xsd:double ;
+         :Longitude_Of_The_Ascending_Node "48.33076593"^^xsd:double ;
+         :Semimajor_Axis "0.38709927"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
 :Moon rdf:type owl:NamedIndividual .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
+:Neptune rdf:type owl:NamedIndividual ;
+         :Has_Orbit_Center :Sun ;
+         :Argument_Of_Periapsis "44.96476227"^^xsd:double ;
+         :Eccentricity "0.00859048"^^xsd:double ;
+         :Inclination "1.77004347"^^xsd:double ;
+         :Longitude_Of_The_Ascending_Node "131.7842257"^^xsd:double ;
+         :Semimajor_Axis "30.06992276"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos
 :Phobos rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn
+:Saturn rdf:type owl:NamedIndividual ;
+        :Has_Orbit_Center :Sun ;
+        :Argument_Of_Periapsis "92.59887831"^^xsd:double ;
+        :Eccentricity "0.05386179"^^xsd:double ;
+        :Inclination "2.48599187"^^xsd:double ;
+        :Longitude_Of_The_Ascending_Node "113.6624245"^^xsd:double ;
+        :Semimajor_Axis "9.53667594"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
@@ -339,7 +410,28 @@
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
-:Sun rdf:type owl:NamedIndividual .
+:Sun rdf:type owl:NamedIndividual ,
+              :Star .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus
+:Uranus rdf:type owl:NamedIndividual ;
+        :Has_Orbit_Center :Sun ;
+        :Argument_Of_Periapsis "170.9542763"^^xsd:double ;
+        :Eccentricity "0.04725744"^^xsd:double ;
+        :Inclination "0.77263783"^^xsd:double ;
+        :Longitude_Of_The_Ascending_Node "74.01692503"^^xsd:double ;
+        :Semimajor_Axis "19.18916464"^^xsd:double .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Venus
+:Venus rdf:type owl:NamedIndividual ;
+       :Has_Orbit_Center :Sun ;
+       :Argument_Of_Periapsis "131.6024672"^^xsd:double ;
+       :Eccentricity "0.00677672"^^xsd:double ;
+       :Inclination "3.39467605"^^xsd:double ;
+       :Longitude_Of_The_Ascending_Node "76.67984255"^^xsd:double ;
+       :Semimajor_Axis "0.72333566"^^xsd:double .
 
 
 #################################################################
