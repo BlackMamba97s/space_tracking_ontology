@@ -177,9 +177,9 @@
                                                                owl:onProperty :Semimajor_Axis ;
                                                                owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                                     owl:onDatatype xsd:double ;
-                                                                                    owl:withRestrictions ( [ xsd:minInclusive "1.42117977E8"^^xsd:double
+                                                                                    owl:withRestrictions ( [ xsd:minInclusive "0,949999998897"^^xsd:double
                                                                                                            ]
-                                                                                                           [ xsd:maxInclusive "2.0495E8"^^xsd:double
+                                                                                                           [ xsd:maxInclusive "1.37000613071"^^xsd:double
                                                                                                            ]
                                                                                                          )
                                                                                   ]
@@ -214,7 +214,7 @@
                                                                                  owl:onProperty :Semimajor_Axis ;
                                                                                  owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                                                       owl:onDatatype xsd:double ;
-                                                                                                      owl:withRestrictions ( [ xsd:maxInclusive "1.42117977E8"^^xsd:double
+                                                                                                      owl:withRestrictions ( [ xsd:maxInclusive "0,949999998897"^^xsd:double
                                                                                                                              ]
                                                                                                                            )
                                                                                                     ]
@@ -226,7 +226,7 @@
                                                           owl:onProperty :Semimajor_Axis ;
                                                           owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                                owl:onDatatype xsd:double ;
-                                                                               owl:withRestrictions ( [ xsd:minInclusive "2.0495E8"^^xsd:double
+                                                                               owl:withRestrictions ( [ xsd:minInclusive "1.37000613071"^^xsd:double
                                                                                                       ]
                                                                                                     )
                                                                              ]
@@ -294,17 +294,6 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
 :Solar_System_Planet rdf:type owl:Class ;
-                     owl:equivalentClass [ rdf:type owl:Class ;
-                                           owl:oneOf ( :Earth
-                                                       :Jupiter
-                                                       :Mars
-                                                       :Mercury
-                                                       :Neptune
-                                                       :Saturn
-                                                       :Uranus
-                                                       :Venus
-                                                     )
-                                         ] ;
                      rdfs:subClassOf :Planet .
 
 
@@ -332,54 +321,16 @@
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth
-:Earth rdf:type owl:NamedIndividual ;
-       :Semimajor_Axis "1.496E8"^^xsd:double .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#International_Space_Station
-:International_Space_Station rdf:type owl:NamedIndividual ,
-                                      :Astronomical_Object ;
-                             :Mass "1.0"^^xsd:double .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter
-:Jupiter rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MRO
 :MRO rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars
-:Mars rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mercury
-:Mercury rdf:type owl:NamedIndividual ;
-         :Semimajor_Axis "5.7909048E7"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
 :Moon rdf:type owl:NamedIndividual .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
-:Neptune rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos
 :Phobos rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite_G_Demo
-:Satellite_G_Demo rdf:type owl:NamedIndividual ,
-                           :Astronomical_Object ;
-                  :Name "Giuseppina Barbara Demo" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn
-:Saturn rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solo
@@ -389,14 +340,6 @@
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
 :Sun rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus
-:Uranus rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Venus
-:Venus rdf:type owl:NamedIndividual .
 
 
 #################################################################
