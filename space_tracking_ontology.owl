@@ -1,12 +1,125 @@
 @prefix : <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann#> .
 @base <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> .
 
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> rdf:type owl:Ontology .
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> rdf:type owl:Ontology ;
+                                                                               rdfs:label "Space Tracking Ontology"^^xsd:string ;
+                                                                               dc:creator "Daniele Migliore Camilleri"^^xsd:string , "Stefano Cocomazzi"^^xsd:string ;
+                                                                               dc:date "2020-01-14T15:36:00+01:00"^^xsd:dateTime ;
+                                                                               dc:description "Ontology made to organize and track astronomical objects all around the solar system and beyond"^^xsd:string ;
+                                                                               dc:title "Space Tracking Ontology"^^xsd:string ;
+                                                                               vann:preferredNameSpacePrefix "STO"^^xsd:string ;
+                                                                               vann:preferredNameSpaceURI "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#"^^xsd:string ;
+                                                                               rdfs:label "Space Tracking"^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty ;
+           dcterms:description "Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."@en ;
+           dcterms:hasVersion <http://dublincore.org/usage/terms/history/#creator-006> ;
+           dcterms:isissued "1999-07-02"^^xsd:date ;
+           dcterms:modified "2008-01-14"^^xsd:date ;
+           rdfs:comment "An entity primarily responsible for making the resource."@en ;
+           rdfs:isDefinedBy dc: ;
+           rdfs:label "Creator"@en ;
+           skos:note "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en .
+
+
+###  http://purl.org/dc/elements/1.1/date
+dc:date rdf:type owl:AnnotationProperty ;
+        dcterms:description "Date may be used to express temporal information at any level of granularity.  Recommended best practice is to use an encoding scheme, such as the W3CDTF profile of ISO 8601 [W3CDTF]."@en ;
+        dcterms:hasVersion <http://dublincore.org/usage/terms/history/#date-006> ;
+        dcterms:isissued "1999-07-02"^^xsd:date ;
+        dcterms:modified "2008-01-14"^^xsd:date ;
+        rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+        rdfs:isDefinedBy dc: ;
+        rdfs:label "Date"@en ;
+        skos:note "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty ;
+               dcterms:description "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
+               dcterms:hasVersion <http://dublincore.org/usage/terms/history/#date-006> ;
+               dcterms:isissued "1999-07-02"^^xsd:date ;
+               dcterms:modified "2008-01-14"^^xsd:date ;
+               rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+               rdfs:isDefinedBy dc: ;
+               rdfs:label "Date"@en ;
+               skos:note "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty ;
+         dcterms:description "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
+         dcterms:hasVersion <http://dublincore.org/usage/terms/history/#date-006> ;
+         dcterms:isissued "1999-07-02"^^xsd:date ;
+         dcterms:modified "2008-01-14"^^xsd:date ;
+         rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+         rdfs:isDefinedBy dc: ;
+         rdfs:label "Date"@en ;
+         skos:note "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en .
+
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/hasVersion
+dcterms:hasVersion rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/isissued
+dcterms:isissued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+dcterms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNameSpacePrefix
+vann:preferredNameSpacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNameSpaceURI
+vann:preferredNameSpaceURI rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#physicsSymbol
+:physicsSymbol rdf:type owl:AnnotationProperty ;
+               rdfs:comment "Identifies the character used in a physics formula (typically a greek letter)"@en ;
+               rdfs:label "Physics Symbol"@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#greekLetter
+:greekLetter rdf:type rdfs:Datatype ;
+             rdfs:comment "Letter of the greek aplhabet, typically used to identify a constant or a variable in Physics"@en ;
+             rdfs:label "Greek Letter"@en ;
+             owl:equivalentClass [ rdf:type rdfs:Datatype ;
+                                   owl:onDatatype xsd:string ;
+                                   owl:withRestrictions ( [ xsd:length 1
+                                                          ]
+                                                        )
+                                 ] .
 
 #################################################################
 #    Object Properties
@@ -17,7 +130,9 @@
                   rdfs:subPropertyOf :Orbits_Around ;
                   rdfs:domain :Astronomical_Object ,
                               :Satellite ;
-                  rdfs:range :Astronomical_Object .
+                  rdfs:range :Astronomical_Object ;
+                  rdfs:label "Has Orbit Center"@en ,
+                             "Ha centro orbitale"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
@@ -25,14 +140,19 @@
             owl:inverseOf :Orbits_Around ;
             rdfs:domain :Astronomical_Object ;
             rdfs:range :Astronomical_Object ,
-                       :Satellite .
+                       :Satellite ;
+            rdfs:label "Orbitato da"@it ,
+                       "Orbited By"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around
 :Orbits_Around rdf:type owl:ObjectProperty ;
                rdfs:domain :Astronomical_Object ;
                rdfs:range :Astronomical_Object ,
-                          :Satellite .
+                          :Satellite ;
+               rdfs:label "Orbita Intorno"@it ,
+                          "Orbits Around"@en .
+
 
 
 #################################################################
@@ -42,22 +162,35 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis
 :Argument_Of_Periapsis rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf :Orbital_Parameter ;
-                       rdfs:range xsd:double .
+                       rdfs:range xsd:double ;
+                       :physicsSymbol "ω"^^:greekLetter ;
+                       rdfs:comment "defines the orientation of the ellipse in the orbital plane, as an angle measured from the ascending node to the periapsis"@en ;
+                       rdfs:label "Argument of Periapsis"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity
 :Eccentricity rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :Orbital_Parameter .
-
+              rdfs:subPropertyOf :Orbital_Parameter ;
+              rdfs:range xsd:double ;
+              rdfs:label "Eccentricity"@en ;
+              :physicsSymbol "e"^^xsd:string .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inclination
 :Inclination rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :Orbital_Parameter .
-
+             rdfs:subPropertyOf :Orbital_Parameter ;
+             rdfs:range xsd:double ;
+             rdfs:comment "Vertical tilt of the ellipse with respect to the reference plane, measured at the ascending node according to a reference plane"@en ;
+             rdfs:label "Inclination"@en ;
+             :physicsSymbol "i"^^xsd:string .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Longitude_Of_The_Ascending_Node
 :Longitude_Of_The_Ascending_Node rdf:type owl:DatatypeProperty ;
-                                 rdfs:subPropertyOf :Orbital_Parameter .
+                                 rdfs:subPropertyOf :Orbital_Parameter ;
+                                 rdfs:range xsd:double ;
+                                 rdfs:comment "horizontally orients the ascending node of the ellipse"@en ;
+                                 rdfs:label "Longitude of the ascending node"@en ;
+                                 :physicsSymbol "Ω"^^:greekLetter .
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mass
@@ -67,17 +200,28 @@
                    owl:withRestrictions ( [ xsd:minExclusive "0.0"^^xsd:double
                                           ]
                                         )
-                 ] .
+                 ] ;
+      rdfs:comment "The mass of a thing expressed in Kg"@en ;
+      rdfs:label "Mass"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name
 :Name rdf:type owl:DatatypeProperty ;
-      rdfs:range xsd:string .
+      rdfs:range xsd:string ;
+       rdfs:comment "The attribute that identifies the name of an object"@en ;
+       rdfs:label "Name"@en .
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbital_Parameter
 :Orbital_Parameter rdf:type owl:DatatypeProperty ;
-                   rdfs:domain :Orbiter .
+                   rdfs:domain :Orbiter ;
+                   rdfs:range xsd:double ;
+                   rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
+                   rdfs:label "Semimajor Axis"@en ;
+                   :physicsSymbol "a"^^xsd:string .
+
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
@@ -87,12 +231,22 @@
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Semimajor_Axis
 :Semimajor_Axis rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf :Orbital_Parameter ;
-                rdfs:range xsd:double .
+                rdfs:range xsd:double ;
+                rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
+                rdfs:label "Semimajor Axis"@en ;
+                :physicsSymbol "a"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#True_Anomaly
 :True_Anomaly rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :Orbital_Parameter .
+              rdfs:subPropertyOf :Orbital_Parameter ;
+              rdfs:range xsd:double ;
+              :physicsSymbol "f"^^xsd:string ,
+                             "θ"^^:greekLetter ,
+                             "ν"^^xsd:string ;
+              rdfs:comment "defines the position of the orbiting body along the ellipse at a specific time"@en ;
+              rdfs:label "True Anomaly"@en .
+
 
 
 #################################################################
@@ -305,7 +459,10 @@
                                                        :Venus
                                                      )
                                          ] ;
-                     rdfs:subClassOf :Planet .
+                     rdfs:subClassOf :Planet ;
+                     owl:disjointUnionOf ( :Habitable_Planet
+                                           :Inhabitable_Planet
+                                         ) .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
