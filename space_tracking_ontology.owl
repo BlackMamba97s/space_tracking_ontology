@@ -266,8 +266,11 @@ skos:note rdf:type owl:AnnotationProperty .
                                                         rdf:type owl:Class
                                                       ]
                                  ] ;
-             rdfs:subClassOf :Orbiter .
-
+             rdfs:subClassOf :Orbiter ;
+            dc:description "An Aerocentric Orbiter is an Astronomical Object that orbits around the planet Mars"@en ;
+            rdfs:label "Aerocentric"@en ,
+                       "Aerocentrico"@it ;
+            rdfs:seeAlso "https://en.wikipedia.org/wiki/Areocentric_orbit"@en .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Artificial_Satellite
 :Artificial_Satellite rdf:type owl:Class ;
@@ -276,31 +279,57 @@ skos:note rdf:type owl:AnnotationProperty .
                       rdfs:comment "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@it ;
                       rdfs:label "Artificial Satellite"@en ,
                                  "Satellite Artificiale"@it ;
-                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Satellite"@it .
+                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Satellite"@it ;
+                      dc:description "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@en ;
+                                            rdfs:label "Artificial Satellite"@en ,
+                                                       "Satellite Artificiale"@it ;
+                                            rdfs:seeAlso <https://en.wikipedia.org/wiki/Satellite> .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Asteroid
 :Asteroid rdf:type owl:Class ;
-          rdfs:subClassOf :Astronomical_Object .
+          rdfs:subClassOf :Astronomical_Object ;
+          dc:description "Asteroids are actually minor planets which can neither be classified either as a planet or as a comet."@en ,
+                         "Asteroids are small Celestial body with a composition similar to a Terrestrial planet, generally not sperical shape"@en ;
+          rdfs:label "Asteroid"@en ,
+                     "Asteroide"@it ;
+           rdfs:seeAlso "https://en.wikipedia.org/wiki/Asteroid" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object
-:Astronomical_Object rdf:type owl:Class .
+:Astronomical_Object rdf:type owl:Class ;
+dc:description "Astronomical Body is a naturally occuring physical entity, association, or structure that exists in the observable universe."@en ;
+                     rdfs:label "Astronomical Object"@en ,
+                                "Oggetto Astronomico"@it ;
+                     rdfs:seeAlso "https://en.wikipedia.org/wiki/Astronomical_object" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Black_Hole
 :Black_Hole rdf:type owl:Class ;
-            rdfs:subClassOf :Star .
+            rdfs:subClassOf :Star ;
+            dc:description "A black hole is a region of spacetime exhibiting gravitational acceleration so strong that nothing, no particles or even electromagnetic radiation such as light, can escape from it."@en ;
+                        rdfs:label "Black Hole"@en ,
+                                   "Buco nero"@it ;
+                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Black_hole"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Comet
 :Comet rdf:type owl:Class ;
-       rdfs:subClassOf :Astronomical_Object .
+       rdfs:subClassOf :Astronomical_Object ;
+       dc:description "A comet is an icy, small Solar System body that, when passing close to the Sun, warms and begins to release gases, a process called outgassing."@en ,
+                           "Comets sometimes can have one or two tails"@en ;
+              rdfs:label "Comet"@en ,
+                         "Cometa"@it ;
+              rdfs:seeAlso "https://en.wikipedia.org/wiki/Comet"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dwarf_Planet
 :Dwarf_Planet rdf:type owl:Class ;
-              rdfs:subClassOf :Astronomical_Object .
+              rdfs:subClassOf :Astronomical_Object ;
+              dc:description "A dwarf planet is a planetary-mass object that does not dominate its region of space and is not a satellite."@en ;
+                            rdfs:label "Dwarf Planet"@en ,
+                                       "Pianeta Nano"@it ;
+                            rdfs:seeAlso "https://en.wikipedia.org/wiki/Dwarf_planet"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Geocentric
@@ -316,12 +345,20 @@ skos:note rdf:type owl:AnnotationProperty .
                                                        rdf:type owl:Class
                                                      ]
                                 ] ;
-            rdfs:subClassOf :Orbiter .
+            rdfs:subClassOf :Orbiter ;
+                        dc:description "A Geocentric Orbiter is an Astronomical Object that orbits around the planet Earth"@en ;
+                        rdfs:label "Geocentric"@en ,
+                                   "Geocentrico"@it ;
+                        rdfs:seeAlso <https://en.wikipedia.org/wiki/Geocentric_orbit> .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Giant_Planet
 :Giant_Planet rdf:type owl:Class ;
-              rdfs:subClassOf :Planet .
+              rdfs:subClassOf :Planet ;
+              dc:description "A giant planet is any planet much larger than Earth."@en ;
+                            rdfs:label "Giant Planet"@en ,
+                                       "Pianeta Gigante"@it ;
+                            rdfs:seeAlso "https://en.wikipedia.org/wiki/Giant_planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable_Planet
@@ -341,7 +378,11 @@ skos:note rdf:type owl:AnnotationProperty .
                                                            ) ;
                                         rdf:type owl:Class
                                       ] ;
-                  rdfs:subClassOf :Solar_System_Planet .
+                  rdfs:subClassOf :Solar_System_Planet ;
+                  dc:description "Habitable Planet is a planet that is able to develop and maintain environments hospitable to life."@en ;
+                                    rdfs:label "Habitable Planet"@en ,
+                                               "Pianeta Abitabile"@it ;
+                                    rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Heliocentric
@@ -357,7 +398,11 @@ skos:note rdf:type owl:AnnotationProperty .
                                                          rdf:type owl:Class
                                                        ]
                                   ] ;
-              rdfs:subClassOf :Orbiter .
+              rdfs:subClassOf :Orbiter ;
+              dc:description "An Aerocentric Orbiter is an Astronomical Object that orbits around the Star Sun"@en ;
+                            rdfs:isDefinedBy "https://en.wiktionary.org/wiki/heliocentric"@en ;
+                            rdfs:label "Eliocentrico"@it ,
+                                       "Heliocentric"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inhabitable_Planet
@@ -387,12 +432,11 @@ skos:note rdf:type owl:AnnotationProperty .
                                                         ]
                                                       )
                                         ] ;
-                    rdfs:subClassOf :Solar_System_Planet .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lonely_Object
-:Lonely_Object rdf:type owl:Class ;
-               rdfs:subClassOf :Astronomical_Object .
+                    rdfs:subClassOf :Solar_System_Planet ;
+                    dc:description "Habitable Planet is a planet that is not able to develop and maintain environments hospitable to life."@en ;
+                                        rdfs:label "Inhabitable Planet"@en ,
+                                                   "Pianeta Inabitabile"@it ;
+                                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lunar
@@ -408,14 +452,19 @@ skos:note rdf:type owl:AnnotationProperty .
                                                   rdf:type owl:Class
                                                 ]
                            ] ;
-       rdfs:subClassOf :Orbiter .
+       rdfs:subClassOf :Orbiter ;
+        dc:description "a Lunar Orbiter is an Astronomical Object that orbits around the Moon"@en ;
+              rdfs:isDefinedBy "https://en.wiktionary.org/wiki/lunar"@en ;
+              rdfs:label "Lunar"@en ,
+                         "Lunare"@it ;
+              rdfs:seeAlso "https://en.wikipedia.org/wiki/Lunar_orbit"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
 :Natural_Satellite rdf:type owl:Class ;
                    rdfs:subClassOf :Astronomical_Object ,
                                    :Satellite ;
-                   rdfs:comment "A Naturale Satellite is an astronomical body that orbits a planet or minor planet"@en ;
+                   rdfs:comment "A Natural Satellite is an astronomical body that orbits a planet or minor planet"@en ;
                    rdfs:label "Natural Satellite"@en ,
                               "Satellite Naturale"@en ;
                    rdfs:seeAlso "https://en.wikipedia.org/wiki/Natural_satellite"@en .
@@ -426,21 +475,31 @@ skos:note rdf:type owl:AnnotationProperty .
          owl:equivalentClass [ rdf:type owl:Restriction ;
                                owl:onProperty :Has_Orbit_Center ;
                                owl:someValuesFrom :Astronomical_Object
-                             ] .
+                             ] ;
+                           dc:description  "Orbiter is a thing that orbits around an astronomical body. They are defined by the astronomical body at the center of the orbit. The most common orbits are: \"Geocentrisc\", \"Lunars\", \"Heliocntrics\" and \"Areocentrics\"."^^xsd:string ;
+                                      rdfs:label "Orbiter"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
 :Planet rdf:type owl:Class ;
-        rdfs:subClassOf :Astronomical_Object .
+        rdfs:subClassOf :Astronomical_Object ;
+        rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q634> ;
+                rdfs:label "Pianeta"@it ,
+                           "Planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pulsar
 :Pulsar rdf:type owl:Class ;
-        rdfs:subClassOf :Star .
+        rdfs:subClassOf :Star;
+        dc:description "A pulsar is a highly magnetized rotating neutron star that emits beams of electromagnetic radiation out of its magnetic poles."@en ;
+                rdfs:label "Pulsar"@en ,
+                           "Pulsar"@it ;
+                rdfs:seeAlso "https://en.wikipedia.org/wiki/Pulsar"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite
 :Satellite rdf:type owl:Class ;
+            rdfs:isDefinedBy <https://en.wiktionary.org/wiki/satellite> ;
            rdfs:comment "A Naturale Satellite is an astronomical body that orbits a planet or minor planet"@en ;
            rdfs:label "Satellite"@en ,
                       "Satellite"@it .
@@ -462,27 +521,45 @@ skos:note rdf:type owl:AnnotationProperty .
                      rdfs:subClassOf :Planet ;
                      owl:disjointUnionOf ( :Habitable_Planet
                                            :Inhabitable_Planet
-                                         ) .
+                                         ) ;
+                                         dc:description "Solar System Planet are all the planets that are in the solar system"@en ;
+                                                              rdfs:label "Pianeta del sistema solare"@it ,
+                                                                         "Solar System Planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
 :Star rdf:type owl:Class ;
-      rdfs:subClassOf :Astronomical_Object .
+      rdfs:subClassOf :Astronomical_Object ;
+      rdfs:label "Star"@en ,
+                       "Stella"@it .
+
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestrial_Planet
 :Terrestrial_Planet rdf:type owl:Class ;
-                    rdfs:subClassOf :Planet .
+                    rdfs:subClassOf :Planet ;
+                     rdfs:comment "Terrestial Planet is a planet that is composed primarily of silicate rocks or metals."@en ;
+                                        rdfs:label "Pianeta terrestre"@it ,
+                                                   "Terrestrial Planet"@en ;
+                                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Terrestrial_planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#White_Dwarf
 :White_Dwarf rdf:type owl:Class ;
-             rdfs:subClassOf :Star .
+             rdfs:subClassOf :Star ;
+                          dc:description "A white dwarf, also called a degenerate dwarf, is a stellar core remnant composed mostly of electron-degenerate matter."@en ;
+                          rdfs:label "Nana Bianca"@it ,
+                                     "White Dwarf"@en ;
+                          rdfs:seeAlso "https://en.wikipedia.org/wiki/White_dwarf"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Yellow_Dwarf
 :Yellow_Dwarf rdf:type owl:Class ;
-              rdfs:subClassOf :Star .
+              rdfs:subClassOf :Star ;
+              dc:description "A G-type main-sequence star, often called a yellow dwarf, or G dwarf star, is a main-sequence star with luminosity class V of spectral type G."@en ;
+                                                  rdfs:label "Nana Gialla"@it ,
+                                                             "Yellow Dwarf"@en ;
+                                                  rdfs:seeAlso "https://en.wikipedia.org/wiki/G-type_main-sequence_star"@en .
 
 
 #################################################################
