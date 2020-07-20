@@ -1,0 +1,8 @@
+.planet-thumbnail{
+    background: black;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    width: 300px;
+    height: 300px
+}

@@ -1,6 +1,5 @@
 @prefix : <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -8,17 +7,19 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> .
 
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology> rdf:type owl:Ontology ;
-                                                                               rdfs:label "Space Tracking Ontology"^^xsd:string ;
-                                                                               dc:creator "Daniele Migliore Camilleri"^^xsd:string , "Stefano Cocomazzi"^^xsd:string ;
-                                                                               dc:date "2020-01-14T15:36:00+01:00"^^xsd:dateTime ;
-                                                                               dc:description "Ontology made to organize and track astronomical objects all around the solar system and beyond"^^xsd:string ;
-                                                                               dc:title "Space Tracking Ontology"^^xsd:string ;
-                                                                               vann:preferredNameSpacePrefix "STO"^^xsd:string ;
-                                                                               vann:preferredNameSpaceURI "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#"^^xsd:string ;
-                                                                               rdfs:label "Space Tracking"^^xsd:string .
+                                                                                dc:creator "Daniele Migliore Camilleri"^^xsd:string ,
+                                                                                           "Stefano Cocomazzi"^^xsd:string ;
+                                                                                dc:date "2020-01-14T15:36:00+01:00"^^xsd:dateTime ;
+                                                                                dc:description "Ontology made to organize and track astronomical objects all around the solar system and beyond"^^xsd:string ;
+                                                                                dc:title "Space Tracking Ontology"^^xsd:string ;
+                                                                                vann:preferredNameSpacePrefix "STO"^^xsd:string ;
+                                                                                vann:preferredNameSpaceURI "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#"^^xsd:string ;
+                                                                                rdfs:label "Space Tracking"^^xsd:string ,
+                                                                                           "Space Tracking Ontology"^^xsd:string .
 
 #################################################################
 #    Annotation properties
@@ -121,6 +122,11 @@ skos:note rdf:type owl:AnnotationProperty .
                                                         )
                                  ] .
 
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
 #################################################################
 #    Object Properties
 #################################################################
@@ -131,8 +137,8 @@ skos:note rdf:type owl:AnnotationProperty .
                   rdfs:domain :Astronomical_Object ,
                               :Satellite ;
                   rdfs:range :Astronomical_Object ;
-                  rdfs:label "Has Orbit Center"@en ,
-                             "Ha centro orbitale"@it .
+                  rdfs:label "Ha centro orbitale"@it ,
+                             "Has Orbit Center"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
@@ -154,6 +160,56 @@ skos:note rdf:type owl:AnnotationProperty .
                           "Orbits Around"@en .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination
+:hasMissionDestination rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :missionDestinationIncludedIn ;
+                       rdfs:domain :Space_Mission ;
+                       rdfs:range :Mission_Destination .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant
+:hasParticipant rdf:type owl:ObjectProperty ;
+                owl:inverseOf :hasParticipant ;
+                rdfs:domain :Mission_Destination ;
+                rdfs:range :Mission_Object .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn
+:isParticipantIn rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Mission_Object ;
+                 rdfs:range :Mission_Destination .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionDestinationIncludedIn
+:missionDestinationIncludedIn rdf:type owl:ObjectProperty ,
+                                       owl:InverseFunctionalProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectIncludedIn
+:missionObjectIncludedIn rdf:type owl:ObjectProperty ;
+                         owl:inverseOf :missionObjectParticipating ;
+                         rdf:type owl:InverseFunctionalProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating
+:missionObjectParticipating rdf:type owl:ObjectProperty ;
+                            rdfs:domain :Space_Mission ;
+                            rdfs:range :Mission_Object ;
+                            rdfs:comment "objectParticipating" .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn
+:roleIncludedIn rdf:type owl:ObjectProperty ;
+                owl:inverseOf :roleOfMission ;
+                rdf:type owl:InverseFunctionalProperty .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission
+:roleOfMission rdf:type owl:ObjectProperty ;
+               rdfs:domain :Space_Mission ;
+               rdfs:range :Mission_Role ;
+               rdfs:comment "roleOfParticipation" .
+
 
 #################################################################
 #    Data properties
@@ -172,25 +228,26 @@ skos:note rdf:type owl:AnnotationProperty .
 :Eccentricity rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :Orbital_Parameter ;
               rdfs:range xsd:double ;
-              rdfs:label "Eccentricity"@en ;
-              :physicsSymbol "e"^^xsd:string .
+              :physicsSymbol "e"^^xsd:string ;
+              rdfs:label "Eccentricity"@en .
+
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inclination
 :Inclination rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf :Orbital_Parameter ;
              rdfs:range xsd:double ;
+             :physicsSymbol "i"^^xsd:string ;
              rdfs:comment "Vertical tilt of the ellipse with respect to the reference plane, measured at the ascending node according to a reference plane"@en ;
-             rdfs:label "Inclination"@en ;
-             :physicsSymbol "i"^^xsd:string .
+             rdfs:label "Inclination"@en .
+
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Longitude_Of_The_Ascending_Node
 :Longitude_Of_The_Ascending_Node rdf:type owl:DatatypeProperty ;
                                  rdfs:subPropertyOf :Orbital_Parameter ;
                                  rdfs:range xsd:double ;
+                                 :physicsSymbol "Ω"^^:greekLetter ;
                                  rdfs:comment "horizontally orients the ascending node of the ellipse"@en ;
-                                 rdfs:label "Longitude of the ascending node"@en ;
-                                 :physicsSymbol "Ω"^^:greekLetter .
-
+                                 rdfs:label "Longitude of the ascending node"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mass
@@ -208,20 +265,17 @@ skos:note rdf:type owl:AnnotationProperty .
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name
 :Name rdf:type owl:DatatypeProperty ;
       rdfs:range xsd:string ;
-       rdfs:comment "The attribute that identifies the name of an object"@en ;
-       rdfs:label "Name"@en .
-
+      rdfs:comment "The attribute that identifies the name of an object"@en ;
+      rdfs:label "Name"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbital_Parameter
 :Orbital_Parameter rdf:type owl:DatatypeProperty ;
                    rdfs:domain :Orbiter ;
                    rdfs:range xsd:double ;
+                   :physicsSymbol "a"^^xsd:string ;
                    rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
-                   rdfs:label "Semimajor Axis"@en ;
-                   :physicsSymbol "a"^^xsd:string .
-
-
+                   rdfs:label "Semimajor Axis"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
@@ -232,9 +286,9 @@ skos:note rdf:type owl:AnnotationProperty .
 :Semimajor_Axis rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf :Orbital_Parameter ;
                 rdfs:range xsd:double ;
+                :physicsSymbol "a"^^xsd:string ;
                 rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
-                rdfs:label "Semimajor Axis"@en ;
-                :physicsSymbol "a"^^xsd:string .
+                rdfs:label "Semimajor Axis"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#True_Anomaly
@@ -246,7 +300,6 @@ skos:note rdf:type owl:AnnotationProperty .
                              "ν"^^xsd:string ;
               rdfs:comment "defines the position of the orbiting body along the ellipse at a specific time"@en ;
               rdfs:label "True Anomaly"@en .
-
 
 
 #################################################################
@@ -267,23 +320,22 @@ skos:note rdf:type owl:AnnotationProperty .
                                                       ]
                                  ] ;
              rdfs:subClassOf :Orbiter ;
-            dc:description "An Aerocentric Orbiter is an Astronomical Object that orbits around the planet Mars"@en ;
-            rdfs:label "Aerocentric"@en ,
-                       "Aerocentrico"@it ;
-            rdfs:seeAlso "https://en.wikipedia.org/wiki/Areocentric_orbit"@en .
+             dc:description "An Aerocentric Orbiter is an Astronomical Object that orbits around the planet Mars"@en ;
+             rdfs:label "Aerocentric"@en ,
+                        "Aerocentrico"@it ;
+             rdfs:seeAlso "https://en.wikipedia.org/wiki/Areocentric_orbit"@en .
+
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Artificial_Satellite
 :Artificial_Satellite rdf:type owl:Class ;
                       rdfs:subClassOf :Satellite ;
                       owl:disjointWith :Natural_Satellite ;
+                      dc:description "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@en ;
                       rdfs:comment "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@it ;
                       rdfs:label "Artificial Satellite"@en ,
                                  "Satellite Artificiale"@it ;
-                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Satellite"@it ;
-                      dc:description "A man-made apparatus designed to be placed in orbit around a celestial body, generally to relay information, data etc. to Earth."@en ;
-                                            rdfs:label "Artificial Satellite"@en ,
-                                                       "Satellite Artificiale"@it ;
-                                            rdfs:seeAlso <https://en.wikipedia.org/wiki/Satellite> .
+                      rdfs:seeAlso <https://en.wikipedia.org/wiki/Satellite> ,
+                                   "https://en.wikipedia.org/wiki/Satellite"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Asteroid
@@ -293,12 +345,12 @@ skos:note rdf:type owl:AnnotationProperty .
                          "Asteroids are small Celestial body with a composition similar to a Terrestrial planet, generally not sperical shape"@en ;
           rdfs:label "Asteroid"@en ,
                      "Asteroide"@it ;
-           rdfs:seeAlso "https://en.wikipedia.org/wiki/Asteroid" .
+          rdfs:seeAlso "https://en.wikipedia.org/wiki/Asteroid" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object
 :Astronomical_Object rdf:type owl:Class ;
-dc:description "Astronomical Body is a naturally occuring physical entity, association, or structure that exists in the observable universe."@en ;
+                     dc:description "Astronomical Body is a naturally occuring physical entity, association, or structure that exists in the observable universe."@en ;
                      rdfs:label "Astronomical Object"@en ,
                                 "Oggetto Astronomico"@it ;
                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Astronomical_object" .
@@ -308,28 +360,28 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
 :Black_Hole rdf:type owl:Class ;
             rdfs:subClassOf :Star ;
             dc:description "A black hole is a region of spacetime exhibiting gravitational acceleration so strong that nothing, no particles or even electromagnetic radiation such as light, can escape from it."@en ;
-                        rdfs:label "Black Hole"@en ,
-                                   "Buco nero"@it ;
-                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Black_hole"@en .
+            rdfs:label "Black Hole"@en ,
+                       "Buco nero"@it ;
+            rdfs:seeAlso "https://en.wikipedia.org/wiki/Black_hole"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Comet
 :Comet rdf:type owl:Class ;
        rdfs:subClassOf :Astronomical_Object ;
        dc:description "A comet is an icy, small Solar System body that, when passing close to the Sun, warms and begins to release gases, a process called outgassing."@en ,
-                           "Comets sometimes can have one or two tails"@en ;
-              rdfs:label "Comet"@en ,
-                         "Cometa"@it ;
-              rdfs:seeAlso "https://en.wikipedia.org/wiki/Comet"@it .
+                      "Comets sometimes can have one or two tails"@en ;
+       rdfs:label "Comet"@en ,
+                  "Cometa"@it ;
+       rdfs:seeAlso "https://en.wikipedia.org/wiki/Comet"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dwarf_Planet
 :Dwarf_Planet rdf:type owl:Class ;
               rdfs:subClassOf :Astronomical_Object ;
               dc:description "A dwarf planet is a planetary-mass object that does not dominate its region of space and is not a satellite."@en ;
-                            rdfs:label "Dwarf Planet"@en ,
-                                       "Pianeta Nano"@it ;
-                            rdfs:seeAlso "https://en.wikipedia.org/wiki/Dwarf_planet"@it .
+              rdfs:label "Dwarf Planet"@en ,
+                         "Pianeta Nano"@it ;
+              rdfs:seeAlso "https://en.wikipedia.org/wiki/Dwarf_planet"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Geocentric
@@ -346,19 +398,20 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                                      ]
                                 ] ;
             rdfs:subClassOf :Orbiter ;
-                        dc:description "A Geocentric Orbiter is an Astronomical Object that orbits around the planet Earth"@en ;
-                        rdfs:label "Geocentric"@en ,
-                                   "Geocentrico"@it ;
-                        rdfs:seeAlso <https://en.wikipedia.org/wiki/Geocentric_orbit> .
+            dc:description "A Geocentric Orbiter is an Astronomical Object that orbits around the planet Earth"@en ;
+            rdfs:label "Geocentric"@en ,
+                       "Geocentrico"@it ;
+            rdfs:seeAlso <https://en.wikipedia.org/wiki/Geocentric_orbit> .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Giant_Planet
 :Giant_Planet rdf:type owl:Class ;
               rdfs:subClassOf :Planet ;
+              owl:disjointWith :Terrestrial_Planet ;
               dc:description "A giant planet is any planet much larger than Earth."@en ;
-                            rdfs:label "Giant Planet"@en ,
-                                       "Pianeta Gigante"@it ;
-                            rdfs:seeAlso "https://en.wikipedia.org/wiki/Giant_planet"@en .
+              rdfs:label "Giant Planet"@en ,
+                         "Pianeta Gigante"@it ;
+              rdfs:seeAlso "https://en.wikipedia.org/wiki/Giant_planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Habitable_Planet
@@ -380,9 +433,9 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                       ] ;
                   rdfs:subClassOf :Solar_System_Planet ;
                   dc:description "Habitable Planet is a planet that is able to develop and maintain environments hospitable to life."@en ;
-                                    rdfs:label "Habitable Planet"@en ,
-                                               "Pianeta Abitabile"@it ;
-                                    rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
+                  rdfs:label "Habitable Planet"@en ,
+                             "Pianeta Abitabile"@it ;
+                  rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Heliocentric
@@ -400,9 +453,9 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                   ] ;
               rdfs:subClassOf :Orbiter ;
               dc:description "An Aerocentric Orbiter is an Astronomical Object that orbits around the Star Sun"@en ;
-                            rdfs:isDefinedBy "https://en.wiktionary.org/wiki/heliocentric"@en ;
-                            rdfs:label "Eliocentrico"@it ,
-                                       "Heliocentric"@en .
+              rdfs:isDefinedBy "https://en.wiktionary.org/wiki/heliocentric"@en ;
+              rdfs:label "Eliocentrico"@it ,
+                         "Heliocentric"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inhabitable_Planet
@@ -434,9 +487,9 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                         ] ;
                     rdfs:subClassOf :Solar_System_Planet ;
                     dc:description "Habitable Planet is a planet that is not able to develop and maintain environments hospitable to life."@en ;
-                                        rdfs:label "Inhabitable Planet"@en ,
-                                                   "Pianeta Inabitabile"@it ;
-                                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
+                    rdfs:label "Inhabitable Planet"@en ,
+                               "Pianeta Inabitabile"@it ;
+                    rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lunar
@@ -453,11 +506,26 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                                 ]
                            ] ;
        rdfs:subClassOf :Orbiter ;
-        dc:description "a Lunar Orbiter is an Astronomical Object that orbits around the Moon"@en ;
-              rdfs:isDefinedBy "https://en.wiktionary.org/wiki/lunar"@en ;
-              rdfs:label "Lunar"@en ,
-                         "Lunare"@it ;
-              rdfs:seeAlso "https://en.wikipedia.org/wiki/Lunar_orbit"@en .
+       dc:description "a Lunar Orbiter is an Astronomical Object that orbits around the Moon"@en ;
+       rdfs:isDefinedBy "https://en.wiktionary.org/wiki/lunar"@en ;
+       rdfs:label "Lunar"@en ,
+                  "Lunare"@it ;
+       rdfs:seeAlso "https://en.wikipedia.org/wiki/Lunar_orbit"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination
+:Mission_Destination rdf:type owl:Class ;
+                     rdfs:comment "participation:Event" .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object
+:Mission_Object rdf:type owl:Class ;
+                rdfs:comment "participation:Object" .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role
+:Mission_Role rdf:type owl:Class ;
+              rdfs:comment "Role" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
@@ -476,31 +544,31 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                                owl:onProperty :Has_Orbit_Center ;
                                owl:someValuesFrom :Astronomical_Object
                              ] ;
-                           dc:description  "Orbiter is a thing that orbits around an astronomical body. They are defined by the astronomical body at the center of the orbit. The most common orbits are: \"Geocentrisc\", \"Lunars\", \"Heliocntrics\" and \"Areocentrics\"."^^xsd:string ;
-                                      rdfs:label "Orbiter"@en .
+         dc:description "Orbiter is a thing that orbits around an astronomical body. They are defined by the astronomical body at the center of the orbit. The most common orbits are: \"Geocentrisc\", \"Lunars\", \"Heliocntrics\" and \"Areocentrics\"."^^xsd:string ;
+         rdfs:label "Orbiter"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
 :Planet rdf:type owl:Class ;
         rdfs:subClassOf :Astronomical_Object ;
         rdfs:isDefinedBy <https://www.wikidata.org/wiki/Q634> ;
-                rdfs:label "Pianeta"@it ,
-                           "Planet"@en .
+        rdfs:label "Pianeta"@it ,
+                   "Planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pulsar
 :Pulsar rdf:type owl:Class ;
-        rdfs:subClassOf :Star;
+        rdfs:subClassOf :Star ;
         dc:description "A pulsar is a highly magnetized rotating neutron star that emits beams of electromagnetic radiation out of its magnetic poles."@en ;
-                rdfs:label "Pulsar"@en ,
-                           "Pulsar"@it ;
-                rdfs:seeAlso "https://en.wikipedia.org/wiki/Pulsar"@en .
+        rdfs:label "Pulsar"@en ,
+                   "Pulsar"@it ;
+        rdfs:seeAlso "https://en.wikipedia.org/wiki/Pulsar"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite
 :Satellite rdf:type owl:Class ;
-            rdfs:isDefinedBy <https://en.wiktionary.org/wiki/satellite> ;
            rdfs:comment "A Naturale Satellite is an astronomical body that orbits a planet or minor planet"@en ;
+           rdfs:isDefinedBy <https://en.wiktionary.org/wiki/satellite> ;
            rdfs:label "Satellite"@en ,
                       "Satellite"@it .
 
@@ -522,49 +590,83 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                      owl:disjointUnionOf ( :Habitable_Planet
                                            :Inhabitable_Planet
                                          ) ;
-                                         dc:description "Solar System Planet are all the planets that are in the solar system"@en ;
-                                                              rdfs:label "Pianeta del sistema solare"@it ,
-                                                                         "Solar System Planet"@en .
+                     dc:description "Solar System Planet are all the planets that are in the solar system"@en ;
+                     rdfs:label "Pianeta del sistema solare"@it ,
+                                "Solar System Planet"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission
+:Space_Mission rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasMissionDestination ;
+                                                            owl:someValuesFrom :Mission_Destination
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :missionObjectParticipating ;
+                                                            owl:someValuesFrom :Mission_Object
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :roleOfMission ;
+                                                            owl:someValuesFrom :Mission_Role
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:comment "Participant Role" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
 :Star rdf:type owl:Class ;
       rdfs:subClassOf :Astronomical_Object ;
       rdfs:label "Star"@en ,
-                       "Stella"@it .
-
+                 "Stella"@it .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestrial_Planet
 :Terrestrial_Planet rdf:type owl:Class ;
                     rdfs:subClassOf :Planet ;
-                     rdfs:comment "Terrestial Planet is a planet that is composed primarily of silicate rocks or metals."@en ;
-                                        rdfs:label "Pianeta terrestre"@it ,
-                                                   "Terrestrial Planet"@en ;
-                                        rdfs:seeAlso "https://en.wikipedia.org/wiki/Terrestrial_planet"@en .
+                    rdfs:comment "Terrestial Planet is a planet that is composed primarily of silicate rocks or metals."@en ;
+                    rdfs:label "Pianeta terrestre"@it ,
+                               "Terrestrial Planet"@en ;
+                    rdfs:seeAlso "https://en.wikipedia.org/wiki/Terrestrial_planet"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#White_Dwarf
 :White_Dwarf rdf:type owl:Class ;
              rdfs:subClassOf :Star ;
-                          dc:description "A white dwarf, also called a degenerate dwarf, is a stellar core remnant composed mostly of electron-degenerate matter."@en ;
-                          rdfs:label "Nana Bianca"@it ,
-                                     "White Dwarf"@en ;
-                          rdfs:seeAlso "https://en.wikipedia.org/wiki/White_dwarf"@en .
+             dc:description "A white dwarf, also called a degenerate dwarf, is a stellar core remnant composed mostly of electron-degenerate matter."@en ;
+             rdfs:label "Nana Bianca"@it ,
+                        "White Dwarf"@en ;
+             rdfs:seeAlso "https://en.wikipedia.org/wiki/White_dwarf"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Yellow_Dwarf
 :Yellow_Dwarf rdf:type owl:Class ;
               rdfs:subClassOf :Star ;
               dc:description "A G-type main-sequence star, often called a yellow dwarf, or G dwarf star, is a main-sequence star with luminosity class V of spectral type G."@en ;
-                                                  rdfs:label "Nana Gialla"@it ,
-                                                             "Yellow Dwarf"@en ;
-                                                  rdfs:seeAlso "https://en.wikipedia.org/wiki/G-type_main-sequence_star"@en .
+              rdfs:label "Nana Gialla"@it ,
+                         "Yellow Dwarf"@en ;
+              rdfs:seeAlso "https://en.wikipedia.org/wiki/G-type_main-sequence_star"@en .
 
 
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11
+:Apollo11 rdf:type owl:NamedIndividual ;
+          :roleOfMission :Astronauta ,
+                         :Destinazione_Missione_Apollo11 ,
+                         :Space_Shuttle .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronauta
+:Astronauta rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Destinazione_Missione_Apollo11
+:Destinazione_Missione_Apollo11 rdf:type owl:NamedIndividual .
+
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth
 :Earth rdf:type owl:NamedIndividual ;
@@ -611,7 +713,16 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
-:Moon rdf:type owl:NamedIndividual .
+:Moon rdf:type owl:NamedIndividual ,
+               :Mission_Destination .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MoonLanding
+:MoonLanding rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neil_Armstrong
+:Neil_Armstrong rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
@@ -643,9 +754,18 @@ dc:description "Astronomical Body is a naturally occuring physical entity, assoc
                :Planet .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Shuttle
+:Space_Shuttle rdf:type owl:NamedIndividual .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
 :Sun rdf:type owl:NamedIndividual ,
               :Star .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Terrestre_Prova
+:Terrestre_Prova rdf:type owl:NamedIndividual ,
+                          :Terrestrial_Planet .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus
