@@ -2,14 +2,28 @@ const virtuoso_url = "http://localhost:8890/sparql";
 const virtuoso_key = "dba";
 let namespace_prefix = "space";
 let namespace_uri = "";
-const planet_description_url = "SELECT ?d WHERE {STO:Earth dc:description ?d.}";
-const planet_class_property = "SELECT ?d WHERE {STO:Earth rdf:type ?d.}"
 
-async function getPlanetDescription(planet){
-    const query = `SELECT ?description WHERE {${namespace_prefix}:${planet} dc:description ?description}`;
+async function getOrbitingSatellites(planet){
+    const query = `SELECT ?satellite WHERE {?satellite ${namespace_prefix}:Orbits_Around ${namespace_prefix}:${planet} . }`;
     const complete_url = `${virtuoso_url}?query=${query}&key=${virtuoso_key}&format=json`
     let data = await fetch(complete_url).then(res=>res.json());
-    return data.results.bindings[0].description.value;
+    return parseList(data, "satellite");
+}
+
+async function getPlanetDescription(planet){
+    const query = `SELECT * WHERE {
+        ${namespace_prefix}:${planet} dc:description ?description; 
+                ${namespace_prefix}:wikipediaTitle ?wikipediaTitle;
+                ${namespace_prefix}:wikidataCode ?wikidataCode.
+        }`;
+    const complete_url = `${virtuoso_url}?query=${query}&key=${virtuoso_key}&format=json`
+    let data = await fetch(complete_url).then(res=>res.json());
+    console.log(data)
+    return { 
+        "description": data.results.bindings[0].description.value,
+        "wikipediaTitle": data.results.bindings[0].wikipediaTitle.value,
+        "wikidataCode": data.results.bindings[0].wikidataCode.value,
+    };
 }
 
 async function getPlanetClass(planet){
@@ -33,13 +47,12 @@ async function getNamespace(){
 }
 
 async function getPlanetList(){
-    const query = `SELECT ?p WHERE {?p rdf:type ${namespace_prefix}:Planet}`;
-    console.log(query);
+    const query = `SELECT ?name WHERE { ?name rdf:type ?class. FILTER(regex(STR(?class), ${namespace_prefix}:Planet ) || regex(STR(?class), ${namespace_prefix}:Star))} `;
     const complete_url = `${virtuoso_url}?query=${query}&key=${virtuoso_key}&format=json`;
     fetch(complete_url)
     .then(res=>res.json())
     .then(data=>{
-        const planet_list = parsePlanetList(data)
+        const planet_list = parseList(data, "name");
         planet_list.forEach(el=> {
             $('#searchForm').append(`<option>${String(el)}</option>`)
         })
@@ -47,10 +60,10 @@ async function getPlanetList(){
     })
 }
 
-function parsePlanetList(data){
+function parseList(data, field){
     let result_list = []
     for(let result of data.results.bindings){
-        result_list.push(result.p.value.split("#")[1])
+        result_list.push(result[field].value.split("#")[1])
     }
     return result_list
 }
@@ -67,10 +80,12 @@ async function getOrbitalParameters(planet){
     let data = await fetch(complete_url).then(res=>res.json());
     console.log(data);
     let result = {}
-    for(let param of orbital_param_list){
-        result[param] = data.results.bindings[0][param].value;
+    if(data.results.bindings.length > 0){
+        console.log("look, im the sun")
+        for(let param of orbital_param_list){
+            result[param] = data.results.bindings[0][param].value;
+        }
     }
-        
     return result;     
 }
 
@@ -80,17 +95,17 @@ async function getThumbnail(planet){
     return data.query.pages[0].thumbnail.source;
 }
 
+async function getAliases(planet){
+    const wikidata_query = `SELECT * {wd:${planet} skos:altLabel ?altLabel . FILTER (langMatches(lang(?altLabel), "en")) }`;
+    const wikidata_url = `https://query.wikidata.org/bigdata/namespace/wdq/sparql?query=${wikidata_query}&format=json`;
+    console.log(wikidata_url);
+    let data = await fetch(wikidata_url).then(res => res.json());
+    let aliases = [];
+    for(let alias of data.results.bindings){
+        aliases.push(alias.altLabel.value);
+    }
+    return aliases;
+}
 
-// function getOrbitalParameters(data){
-//     console.log(data)
-//     let result_list = []
-//     for(let result of data.results.bindings){
-//         result_list.push(result.a.value)
-//         result_list.push(result.b.value)
-//         result_list.push(result.c.value)
-//         result_list.push(result.d.value)
-//         result_list.push(result.e.value)
-//     }
-//     return result_list
-// }
+
 

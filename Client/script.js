@@ -7,6 +7,7 @@ $(document).ready(async function(){
     });
     await getNamespace();
     await getPlanetList();
+    await getAliases("Q525");
 })
 
 
@@ -27,18 +28,23 @@ async function findSelectedPlanets(selected_planets){
             console.log("fetching:" + val);      
             let orbital_param_list = await getOrbitalParameters(val);
             console.log(val)
-            if(val == "Mercury") val = val + "_(planet)"
-            let thumbnail = await getThumbnail(val);
-            if(val == "Mercury_(planet)") val = "Mercury"
-            let description = await getPlanetDescription(val);
-            planetClasses = await getPlanetClass(val);
+            // dobbiamo mettere il nuovo wiki title
+            let des = await getPlanetDescription(val);
+            let thumbnail = await getThumbnail(des.wikipediaTitle);
+            let planetClasses = await getPlanetClass(val);
+            let orbiters = await getOrbitingSatellites(val);
+            let aliases = await getAliases(des.wikidataCode);
             // console.log(planetClasses)
             planets[val] = {
                 "name": val,
                 "thumbnail": thumbnail,
                 "param_list" : orbital_param_list,
-                "description" : description,
-                "classes" : planetClasses
+                "description" : des.description,
+                "wikipediaTitle" : des.wikipediaTitle,
+                "wikidataCode": des.wikidataCode,
+                "orbiters": orbiters,
+                "classes" : planetClasses,
+                "aliases" : aliases
             };
         
         }
@@ -53,54 +59,52 @@ function renderPlanetBox(planets){
     for(let i in planets){
         const planet = planets[i];
         $("#planetContainer").append(`
-        <div class="container border border-secondary my-1 px-3 py-1">
-            <!-- row 1, title of the planet -->
-            <div class="row my-1">
-            <div class="col">
-                <h2 class=" pt-2 pb-2 border-bottom text-center">${planet.name}</h2>
-            </div>
-            </div>
-            <!-- row 2 image and description -->
-            <div class="row border-bottom p-3 my-1 mx-0">
-                <div class="col">
-                    <p>
-                    ${planet.description}
-                    </p>
+        <div class="col-md-6 mb-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">${planet.name}</h2>
+                    <p><strong>AKA: </strong>${planet.aliases.join(", ")}</p>
                 </div>
-                <div style='background-image:url("${planet.thumbnail}");' class="planet-thumbnail rounded-circle"></div>
-            </div>
-            <!-- row 3, orbits and other things about the specific planet -->
-            <div class="row pt-1 my-1">
-                <div class="col"><h1 class="text-center w-100">Orbital Parameters</h1></div>
-                <table class="table text-center">
-                    <thead>
-                      <tr>
-                        <th scope="col">Argument Of Periapsis</th>
-                        <th scope="col">Eccentricity</th>
-                        <th scope="col">Inclination</th>
-                        <th scope="col">Longitude Of The Ascending Node</th>
-                        <th scope="col">Semimajor Axis</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>${planet.param_list["Argument_Of_Periapsis"]}</th>
-                        <td>${planet.param_list["Eccentricity"]}</td>
-                        <td>${planet.param_list["Inclination"]}</td>
-                        <td>${planet.param_list["Longitude_Of_The_Ascending_Node"]}</td>
-                        <td>${planet.param_list["Semimajor_Axis"]}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <div class="border-top  row pt-3 my-1">
-                <div class="col">
-                    <p>
-                      Il pianeta ${planet.name} appartiene alla/e classe/i: ${planet.classes}
+                <img src="${planet.thumbnail}"  class="card-img-top" alt="${planet.name}">
+                <div class="card-body">
+                    <p class="card-text">
+                        ${planet.description}
                     </p>
+                    <h4>Orbital Parameters</h4>
+                    <table class="table text-center">
+                        <thead
+                        <tr>
+                            <th scope="col">Argument Of Periapsis</th>
+                            <th scope="col">Eccentricity</th>
+                            <th scope="col">Inclination</th>
+                            <th scope="col">Longitude Of The Ascending Node</th>
+                            <th scope="col">Semimajor Axis</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>${planet.param_list["Argument_Of_Periapsis"] || "None"}</th>
+                            <td>${planet.param_list["Eccentricity"]|| "None"}</td>
+                            <td>${planet.param_list["Inclination"]|| "None"}</td>
+                            <td>${planet.param_list["Longitude_Of_The_Ascending_Node"] || "None"}</td>
+                            <td>${planet.param_list["Semimajor_Axis"] || "None"}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col border p-3">
+                            <h5>Categories</h5>
+                            ${planet.classes.join(", ")}
+                        </div>
+                        <div class="col border p-3">
+                            <h5>Orbiting Satellites</h5>
+                            ${planet.orbiters.join(", ") || "None"}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
       `);
     }
     
