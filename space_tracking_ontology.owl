@@ -179,14 +179,13 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination
 :hasMissionDestination rdf:type owl:ObjectProperty ;
-                       owl:inverseOf :missionDestinationIncludedIn ;
                        rdfs:domain :Space_Mission ;
                        rdfs:range :Mission_Destination .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant
 :hasParticipant rdf:type owl:ObjectProperty ;
-                owl:inverseOf :hasParticipant ;
+                owl:inverseOf :isParticipantIn ;
                 rdfs:domain :Mission_Destination ;
                 rdfs:range :Mission_Object .
 
@@ -216,9 +215,8 @@ xsd:date rdf:type rdfs:Datatype .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectIncludedIn
-:missionObjectIncludedIn rdf:type owl:ObjectProperty ;
-                         owl:inverseOf :missionObjectParticipating ;
-                         rdf:type owl:InverseFunctionalProperty .
+:missionObjectIncludedIn rdf:type owl:ObjectProperty ,
+                                  owl:InverseFunctionalProperty .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating
@@ -230,7 +228,7 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn
 :roleIncludedIn rdf:type owl:ObjectProperty ,
-                         owl:FunctionalProperty ;
+                         owl:InverseFunctionalProperty ;
                 rdfs:domain :Mission_Role ;
                 rdfs:range :Mission_Object ;
                 rdfs:comment "abbiamo messo questa object property funzionale perchè ogni oggetto della missione ha un solo ruolo all'interno della missione, per esempio Neil Armstrong è il comandante, ma non viceversa."^^xsd:string .
