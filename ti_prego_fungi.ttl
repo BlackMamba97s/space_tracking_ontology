@@ -1,0 +1,47 @@
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix :      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann:  <http://purl.org/vocab/vann#> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<urn:MAPID-629473d13b554872a83a02c1de176121_1>
+        a                      rr:TriplesMap ;
+        rr:logicalTable        [ a            rr:R2RMLView ;
+                                 rr:sqlQuery  "select distinct `name`, `planet_id` from `space-tracking-ontology`.`satellite`"
+                               ] ;
+        rr:predicateObjectMap  [ a             rr:PredicateObjectMap ;
+                                 rr:objectMap  [ a            rr:ObjectMap , rr:TermMap ;
+                                                 rr:column    "name" ;
+                                                 rr:datatype  xsd:string ;
+                                                 rr:termType  rr:Literal
+                                               ] ;
+                                 rr:predicate  :Name
+                               ] ;
+        rr:subjectMap          [ a            rr:SubjectMap , rr:TermMap ;
+                                 rr:class     :Natural_Satellite ;
+                                 rr:template  "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#{name}" ;
+                                 rr:termType  rr:IRI
+                               ] .
+
+<urn:MAPID-d98d70db661343eb827596a9e625da3c>
+        a                      rr:TriplesMap ;
+        rr:logicalTable        [ a            rr:R2RMLView ;
+                                 rr:sqlQuery  "SELECT distinct planet.name as pname, satellite.name as sname FROM planet JOIN satellite ON planet.id = satellite.planet_id"
+                               ] ;
+        rr:predicateObjectMap  [ a             rr:PredicateObjectMap ;
+                                 rr:objectMap  [ a            rr:ObjectMap , rr:TermMap ;
+                                                 rr:template  "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#{pname}" ;
+                                                 rr:termType  rr:IRI
+                                               ] ;
+                                 rr:predicate  :Has_Orbit_Center
+                               ] ;
+        rr:subjectMap          [ a            rr:TermMap , rr:SubjectMap ;
+                                 rr:template  "http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#{sname}" ;
+                                 rr:termType  rr:IRI
+                               ] .
