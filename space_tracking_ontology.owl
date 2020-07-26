@@ -147,6 +147,14 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Element
+:Element rdf:type owl:ObjectProperty ;
+         owl:inverseOf :List ;
+         rdf:type owl:InverseFunctionalProperty ;
+         rdfs:domain :Ordered_List ;
+         rdfs:range :List_Element .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center
 :Has_Orbit_Center rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :Orbits_Around ;
@@ -155,6 +163,13 @@ xsd:date rdf:type rdfs:Datatype .
                   rdfs:range :Astronomical_Object ;
                   rdfs:label "Ha centro orbitale"@it ,
                              "Has Orbit Center"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#List
+:List rdf:type owl:ObjectProperty ,
+               owl:FunctionalProperty ;
+      rdfs:domain :List_Element ;
+      rdfs:range :Ordered_List .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
@@ -177,17 +192,15 @@ xsd:date rdf:type rdfs:Datatype .
                           "Orbits Around"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination
-:hasMissionDestination rdf:type owl:ObjectProperty ;
-                       rdfs:domain :Space_Mission ;
-                       rdfs:range :Mission_Destination .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#elementItem
+:elementItem rdf:type owl:ObjectProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :List_Element .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant
 :hasParticipant rdf:type owl:ObjectProperty ;
-                owl:inverseOf :isParticipantIn ;
-                rdfs:domain :Mission_Destination ;
-                rdfs:range :Mission_Object .
+                owl:inverseOf :isParticipantIn .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan
@@ -199,9 +212,7 @@ xsd:date rdf:type rdfs:Datatype .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn
-:isParticipantIn rdf:type owl:ObjectProperty ;
-                 rdfs:domain :Mission_Object ;
-                 rdfs:range :Mission_Destination .
+:isParticipantIn rdf:type owl:ObjectProperty .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan
@@ -209,36 +220,18 @@ xsd:date rdf:type rdfs:Datatype .
                         owl:TransitiveProperty .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionDestinationIncludedIn
-:missionDestinationIncludedIn rdf:type owl:ObjectProperty ,
-                                       owl:InverseFunctionalProperty .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#nextElement
+:nextElement rdf:type owl:ObjectProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :List_Element ;
+             rdfs:range :List_Element .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectIncludedIn
-:missionObjectIncludedIn rdf:type owl:ObjectProperty ,
-                                  owl:InverseFunctionalProperty .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating
-:missionObjectParticipating rdf:type owl:ObjectProperty ;
-                            rdfs:domain :Space_Mission ;
-                            rdfs:range :Mission_Object ;
-                            rdfs:comment "objectParticipating" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn
-:roleIncludedIn rdf:type owl:ObjectProperty ,
-                         owl:InverseFunctionalProperty ;
-                rdfs:domain :Mission_Role ;
-                rdfs:range :Mission_Object ;
-                rdfs:comment "abbiamo messo questa object property funzionale perchè ogni oggetto della missione ha un solo ruolo all'interno della missione, per esempio Neil Armstrong è il comandante, ma non viceversa."^^xsd:string .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission
-:roleOfMission rdf:type owl:ObjectProperty ;
-               rdfs:domain :Space_Mission ;
-               rdfs:range :Mission_Role ;
-               rdfs:comment "roleOfParticipation" .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#previousElement
+:previousElement rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :List_Element ;
+                 rdfs:range :List_Element .
 
 
 #################################################################
@@ -330,6 +323,26 @@ xsd:date rdf:type rdfs:Datatype .
                              "ν"^^xsd:string ;
               rdfs:comment "defines the position of the orbiting body along the ellipse at a specific time"@en ;
               rdfs:label "True Anomaly"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#elementIndex
+:elementIndex rdf:type owl:DatatypeProperty ;
+              rdfs:range [ rdf:type rdfs:Datatype ;
+                           owl:onDatatype xsd:integer ;
+                           owl:withRestrictions ( [ xsd:minExclusive 0
+                                                  ]
+                                                )
+                         ] .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#orderedListLength
+:orderedListLength rdf:type owl:DatatypeProperty ;
+                   rdfs:range [ rdf:type rdfs:Datatype ;
+                                owl:onDatatype xsd:integer ;
+                                owl:withRestrictions ( [ xsd:minInclusive 0
+                                                       ]
+                                                     )
+                              ] .
 
 
 #################################################################
@@ -522,6 +535,10 @@ xsd:date rdf:type rdfs:Datatype .
                     rdfs:seeAlso "https://en.wikipedia.org/wiki/Planetary_habitability"@en .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#List_Element
+:List_Element rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Lunar
 :Lunar rdf:type owl:Class ;
        owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -543,21 +560,6 @@ xsd:date rdf:type rdfs:Datatype .
        rdfs:seeAlso "https://en.wikipedia.org/wiki/Lunar_orbit"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination
-:Mission_Destination rdf:type owl:Class ;
-                     rdfs:comment "participation:Event" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object
-:Mission_Object rdf:type owl:Class ;
-                rdfs:comment "participation:Object" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role
-:Mission_Role rdf:type owl:Class ;
-              rdfs:comment "Role" .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
 :Natural_Satellite rdf:type owl:Class ;
                    rdfs:subClassOf :Astronomical_Object ,
@@ -576,6 +578,10 @@ xsd:date rdf:type rdfs:Datatype .
                              ] ;
          dc:description "Orbiter is a thing that orbits around an astronomical body. They are defined by the astronomical body at the center of the orbit. The most common orbits are: \"Geocentrisc\", \"Lunars\", \"Heliocntrics\" and \"Areocentrics\"."^^xsd:string ;
          rdfs:label "Orbiter"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ordered_List
+:Ordered_List rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
@@ -625,26 +631,6 @@ xsd:date rdf:type rdfs:Datatype .
                                 "Solar System Planet"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission
-:Space_Mission rdf:type owl:Class ;
-               owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasMissionDestination ;
-                                                            owl:someValuesFrom :Mission_Destination
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :missionObjectParticipating ;
-                                                            owl:someValuesFrom :Mission_Object
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :roleOfMission ;
-                                                            owl:someValuesFrom :Mission_Role
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-               rdfs:comment "Participant Role" .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
 :Star rdf:type owl:Class ;
       rdfs:subClassOf :Astronomical_Object ;
@@ -689,7 +675,9 @@ xsd:date rdf:type rdfs:Datatype .
                   :Natural_Satellite ,
                   :Satellite ;
          :Has_Orbit_Center :Saturn ;
-         :Name "Aegaeon"^^xsd:string .
+         :Name "Aegaeon"^^xsd:string ;
+         rdfs:comment "Moon orbiting around Saturn"^^xsd:string ;
+         rdfs:label "Aegaeon"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Amalthea
@@ -698,7 +686,9 @@ xsd:date rdf:type rdfs:Datatype .
                    :Natural_Satellite ,
                    :Satellite ;
           :Has_Orbit_Center :Jupiter ;
-          :Name "Amalthea"^^xsd:string .
+          :Name "Amalthea"^^xsd:string ;
+          rdfs:comment "Moon orbiting around Jupiter"^^xsd:string ;
+          rdfs:label "Amalthea"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Andrastea
@@ -707,7 +697,9 @@ xsd:date rdf:type rdfs:Datatype .
                     :Natural_Satellite ,
                     :Satellite ;
            :Has_Orbit_Center :Jupiter ;
-           :Name "Andrastea"^^xsd:string .
+           :Name "Andrastea"^^xsd:string ;
+           rdfs:comment "Moon orbiting around Jupiter"^^xsd:string ;
+           rdfs:label "Andrastea"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Anthe
@@ -716,14 +708,9 @@ xsd:date rdf:type rdfs:Datatype .
                 :Natural_Satellite ,
                 :Satellite ;
        :Has_Orbit_Center :Saturn ;
-       :Name "Anthe"^^xsd:string .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11
-:Apollo11 rdf:type owl:NamedIndividual ;
-          :roleOfMission :Astronauta ,
-                         :Destinazione_Missione_Apollo11 ,
-                         :Space_Shuttle .
+       :Name "Anthe"^^xsd:string ;
+       rdfs:comment "Moon orbiting around Saturn"^^xsd:string ;
+       rdfs:label "Anthe"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ariel
@@ -732,11 +719,9 @@ xsd:date rdf:type rdfs:Datatype .
                 :Natural_Satellite ,
                 :Satellite ;
        :Has_Orbit_Center :Uranus ;
-       :Name "Ariel"^^xsd:string .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronauta
-:Astronauta rdf:type owl:NamedIndividual .
+       :Name "Ariel"^^xsd:string ;
+       rdfs:comment "Moon orbiting around Uranus"^^xsd:string ;
+       rdfs:label "Ariel"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Atlas
@@ -745,7 +730,8 @@ xsd:date rdf:type rdfs:Datatype .
                 :Natural_Satellite ,
                 :Satellite ;
        :Has_Orbit_Center :Saturn ;
-       :Name "Atlas"^^xsd:string .
+       :Name "Atlas"^^xsd:string ;
+       rdfs:label "Atlas"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Callisto
@@ -754,7 +740,8 @@ xsd:date rdf:type rdfs:Datatype .
                    :Natural_Satellite ,
                    :Satellite ;
           :Has_Orbit_Center :Jupiter ;
-          :Name "Callisto"^^xsd:string .
+          :Name "Callisto"^^xsd:string ;
+          rdfs:label "Callisto"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Calypso
@@ -763,7 +750,8 @@ xsd:date rdf:type rdfs:Datatype .
                   :Natural_Satellite ,
                   :Satellite ;
          :Has_Orbit_Center :Saturn ;
-         :Name "Calypso"^^xsd:string .
+         :Name "Calypso"^^xsd:string ;
+         rdfs:label "Calypso"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Daphins
@@ -772,7 +760,8 @@ xsd:date rdf:type rdfs:Datatype .
                   :Natural_Satellite ,
                   :Satellite ;
          :Has_Orbit_Center :Saturn ;
-         :Name "Daphins"^^xsd:string .
+         :Name "Daphins"^^xsd:string ;
+         rdfs:label "Daphins"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Deimos
@@ -782,10 +771,6 @@ xsd:date rdf:type rdfs:Datatype .
                  :Satellite ;
         :Has_Orbit_Center :Mars ;
         :Name "Deimos"^^xsd:string .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Destinazione_Missione_Apollo11
-:Destinazione_Missione_Apollo11 rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dione
@@ -835,6 +820,15 @@ xsd:date rdf:type rdfs:Datatype .
                  :Satellite ;
         :Has_Orbit_Center :Jupiter ;
         :Name "Europa"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#First_Planet
+:First_Planet rdf:type owl:NamedIndividual ,
+                       :List_Element ;
+              :List :Solar_System_Planets ;
+              :elementItem :Mercury ;
+              :nextElement :Second_Planet ;
+              :elementIndex 1 .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ganymede
@@ -906,10 +900,6 @@ xsd:date rdf:type rdfs:Datatype .
          :wikipediaTitle "Jupiter"^^xsd:string .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MRO
-:MRO rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars
 :Mars rdf:type owl:NamedIndividual ,
                :Astronomical_Object ,
@@ -975,18 +965,9 @@ xsd:date rdf:type rdfs:Datatype .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
-:Moon rdf:type owl:NamedIndividual ,
-               :Mission_Destination ;
+:Moon rdf:type owl:NamedIndividual ;
       :Has_Orbit_Center :Earth ;
       :isSmallerThan :Earth .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#MoonLanding
-:MoonLanding rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neil_Armstrong
-:Neil_Armstrong rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
@@ -1109,8 +1090,19 @@ xsd:date rdf:type rdfs:Datatype .
         :wikipediaTitle "Saturn"^^xsd:string .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Shuttle
-:Space_Shuttle rdf:type owl:NamedIndividual .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet
+:Second_Planet rdf:type owl:NamedIndividual ;
+               :List :Solar_System_Planets ;
+               :elementItem :Venus ;
+               :nextElement :Third_Planet ;
+               :previousElement :First_Planet ;
+               :elementIndex 2 .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets
+:Solar_System_Planets rdf:type owl:NamedIndividual ,
+                               :Ordered_List ;
+                      :orderedListLength 8 .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
@@ -1147,6 +1139,14 @@ xsd:date rdf:type rdfs:Datatype .
                 :Satellite ;
        :Has_Orbit_Center :Jupiter ;
        :Name "Thebe"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Third_Planet
+:Third_Planet rdf:type owl:NamedIndividual ;
+              :List :Solar_System_Planets ;
+              :elementItem :Earth ;
+              :previousElement :Second_Planet ;
+              :elementIndex 3 .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titan
