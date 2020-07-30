@@ -57,10 +57,6 @@
                                               <http://www.w3.org/2004/02/skos/core#note> "A second property with the same name as this property has been declared in the dcterms: namespace (http://purl.org/dc/terms/).  See the Introduction to the document \"DCMI Metadata Terms\" (http://dublincore.org/documents/dcmi-terms/) for an explanation."@en .
 
 
-###  http://purl.org/dc/elements/1.1/desctiption
-<http://purl.org/dc/elements/1.1/desctiption> rdf:type owl:AnnotationProperty .
-
-
 ###  http://purl.org/dc/elements/1.1/title
 <http://purl.org/dc/elements/1.1/title> rdf:type owl:AnnotationProperty ;
                                         <http://purl.org/dc/terms/description> "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
@@ -97,14 +93,16 @@
 <http://purl.org/vocab/vann#preferredNameSpaceURI> rdf:type owl:AnnotationProperty .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikidataCode
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikidataCode> rdf:type owl:AnnotationProperty .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#physicsSymbol
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#physicsSymbol> rdf:type owl:AnnotationProperty ;
                                                                                              rdfs:comment "Identifies the character used in a physics formula (typically a greek letter)"@en ;
                                                                                              rdfs:label "Physics Symbol"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikidataCode
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikidataCode> rdf:type owl:AnnotationProperty ;
+                                                                                            rdfs:comment "Identifies the wikidata page code (useful for the API)"@en ;
+                                                                                            rdfs:label "Wikidata Code"@en .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle
@@ -156,6 +154,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> rdf:type owl:ObjectProperty ;
                                                                                           owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> ;
+                                                                                          rdf:type owl:TransitiveProperty ;
                                                                                           rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ;
                                                                                           rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
                                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
@@ -164,7 +163,8 @@ xsd:date rdf:type rdfs:Datatype .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> rdf:type owl:ObjectProperty ;
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> rdf:type owl:ObjectProperty ,
+                                                                                                      owl:TransitiveProperty ;
                                                                                              rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ;
                                                                                              rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
                                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
@@ -172,56 +172,61 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                         "Orbits Around"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination> rdf:type owl:ObjectProperty ;
-                                                                                                     owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionDestinationIncludedIn> ;
-                                                                                                     rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission> ;
-                                                                                                     rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination> .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant> rdf:type owl:ObjectProperty ;
-                                                                                              owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant> ;
-                                                                                              rdf:type owl:SymmetricProperty ;
-                                                                                              rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination> ;
-                                                                                              rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object> .
+                                                                                              owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn> .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan> rdf:type owl:ObjectProperty ;
+                                                                                            owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan> ;
+                                                                                            rdf:type owl:TransitiveProperty ;
+                                                                                            rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ;
+                                                                                            rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn> rdf:type owl:ObjectProperty ;
-                                                                                               rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object> ;
-                                                                                               rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination> .
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn> rdf:type owl:ObjectProperty .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionDestinationIncludedIn
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionDestinationIncludedIn> rdf:type owl:ObjectProperty ,
-                                                                                                                     owl:InverseFunctionalProperty .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan> rdf:type owl:ObjectProperty ,
+                                                                                                      owl:TransitiveProperty .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectIncludedIn
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectIncludedIn> rdf:type owl:ObjectProperty ;
-                                                                                                       owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating> ;
-                                                                                                       rdf:type owl:InverseFunctionalProperty .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#item
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#item> rdf:type owl:ObjectProperty ,
+                                                                                             owl:FunctionalProperty ;
+                                                                                    rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating> rdf:type owl:ObjectProperty ;
-                                                                                                          rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission> ;
-                                                                                                          rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object> ;
-                                                                                                          rdfs:comment "objectParticipating" .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#next
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#next> rdf:type owl:ObjectProperty ,
+                                                                                             owl:FunctionalProperty ;
+                                                                                    rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                    rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn> rdf:type owl:ObjectProperty ;
-                                                                                              owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission> ;
-                                                                                              rdf:type owl:InverseFunctionalProperty .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ordered_list
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ordered_list> rdf:type owl:ObjectProperty ;
+                                                                                            owl:inverseOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#slot> ;
+                                                                                            rdf:type owl:FunctionalProperty ;
+                                                                                            rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                            rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#OrderedList> .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission> rdf:type owl:ObjectProperty ;
-                                                                                             rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission> ;
-                                                                                             rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role> ;
-                                                                                             rdfs:comment "roleOfParticipation" .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#previous
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#previous> rdf:type owl:ObjectProperty ,
+                                                                                                 owl:FunctionalProperty ;
+                                                                                        rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                        rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#slot
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#slot> rdf:type owl:ObjectProperty ,
+                                                                                             owl:InverseFunctionalProperty ;
+                                                                                    rdfs:domain <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#OrderedList> ;
+                                                                                    rdfs:range <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> .
 
 
 #################################################################
@@ -309,6 +314,26 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                                                                                                          "ν"^^xsd:string ;
                                                                                             rdfs:comment "defines the position of the orbiting body along the ellipse at a specific time"@en ;
                                                                                             rdfs:label "True Anomaly"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#index
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#index> rdf:type owl:DatatypeProperty ;
+                                                                                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                                                                                  owl:onDatatype xsd:integer ;
+                                                                                                  owl:withRestrictions ( [ xsd:minExclusive 0
+                                                                                                                         ]
+                                                                                                                       )
+                                                                                                ] .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#length
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#length> rdf:type owl:DatatypeProperty ;
+                                                                                      rdfs:range [ rdf:type rdfs:Datatype ;
+                                                                                                   owl:onDatatype xsd:integer ;
+                                                                                                   owl:withRestrictions ( [ xsd:minInclusive 0
+                                                                                                                          ]
+                                                                                                                        )
+                                                                                                 ] .
 
 
 #################################################################
@@ -593,21 +618,6 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                      rdfs:seeAlso "https://en.wikipedia.org/wiki/Lunar_orbit"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination> rdf:type owl:Class ;
-                                                                                                   rdfs:comment "participation:Event" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object> rdf:type owl:Class ;
-                                                                                              rdfs:comment "participation:Object" .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role> rdf:type owl:Class ;
-                                                                                            rdfs:comment "Role" .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> rdf:type owl:Class ;
                                                                                                  rdfs:subClassOf <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
@@ -635,6 +645,10 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
                                                                                        <http://purl.org/dc/elements/1.1/description> "Orbiter is a thing that orbits around an astronomical body. They are defined by the astronomical body at the center of the orbit. The most common orbits are: \"Geocentrisc\", \"Lunars\", \"Heliocntrics\" and \"Areocentrics\"."^^xsd:string ;
                                                                                        rdfs:label "Orbiter"@en .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#OrderedList
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#OrderedList> rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Planet
@@ -670,6 +684,10 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                     "Satellite"@it .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> rdf:type owl:Class ;
                                                                                                    owl:equivalentClass [ rdf:type owl:Class ;
@@ -694,26 +712,6 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                    <http://purl.org/dc/elements/1.1/description> "Solar System Planet are all the planets that are in the solar system"@en ;
                                                                                                    rdfs:label "Pianeta del sistema solare"@it ,
                                                                                                               "Solar System Planet"@en .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission> rdf:type owl:Class ;
-                                                                                             owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                                                                                          owl:onProperty <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasMissionDestination> ;
-                                                                                                                                          owl:someValuesFrom <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination>
-                                                                                                                                        ]
-                                                                                                                                        [ rdf:type owl:Restriction ;
-                                                                                                                                          owl:onProperty <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#missionObjectParticipating> ;
-                                                                                                                                          owl:someValuesFrom <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Object>
-                                                                                                                                        ]
-                                                                                                                                        [ rdf:type owl:Restriction ;
-                                                                                                                                          owl:onProperty <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission> ;
-                                                                                                                                          owl:someValuesFrom <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role>
-                                                                                                                                        ]
-                                                                                                                                      ) ;
-                                                                                                                   rdf:type owl:Class
-                                                                                                                 ] ;
-                                                                                             rdfs:comment "Participant Role" .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star
@@ -758,24 +756,150 @@ xsd:date rdf:type rdfs:Datatype .
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11> rdf:type owl:NamedIndividual ,
-                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Mission> ;
-                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleOfMission> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronauta> ,
-                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Destinazione_Missione_Apollo11> ,
-                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Shuttle> .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Aegaeon
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Aegaeon> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Aegaeon"^^xsd:string ;
+                                                                                       rdfs:comment "Moon orbiting around Saturn"^^xsd:string ;
+                                                                                       rdfs:label "Aegaeon"^^xsd:string .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronauta
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronauta> rdf:type owl:NamedIndividual ,
-                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role> ;
-                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11> .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Amalthea
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Amalthea> rdf:type owl:NamedIndividual ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Amalthea"^^xsd:string ;
+                                                                                        rdfs:comment "Moon orbiting around Jupiter"^^xsd:string ;
+                                                                                        rdfs:label "Amalthea"^^xsd:string .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Destinazione_Missione_Apollo11
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Destinazione_Missione_Apollo11> rdf:type owl:NamedIndividual ,
-                                                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role> ;
-                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11> .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Andrastea
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Andrastea> rdf:type owl:NamedIndividual ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Andrastea"^^xsd:string ;
+                                                                                         rdfs:comment "Moon orbiting around Jupiter"^^xsd:string ;
+                                                                                         rdfs:label "Andrastea"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Anthe
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Anthe> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Anthe"^^xsd:string ;
+                                                                                     rdfs:comment "Moon orbiting around Saturn"^^xsd:string ;
+                                                                                     rdfs:label "Anthe"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ariel
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ariel> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Ariel"^^xsd:string ;
+                                                                                     rdfs:comment "Moon orbiting around Uranus"^^xsd:string ;
+                                                                                     rdfs:label "Ariel"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Atlas
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Atlas> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Atlas"^^xsd:string ;
+                                                                                     rdfs:label "Atlas"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Callisto
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Callisto> rdf:type owl:NamedIndividual ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Callisto"^^xsd:string ;
+                                                                                        rdfs:label "Callisto"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Calypso
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Calypso> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Calypso"^^xsd:string ;
+                                                                                       rdfs:label "Calypso"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Daphins
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Daphins> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Daphins"^^xsd:string ;
+                                                                                       rdfs:label "Daphins"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Deimos
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Deimos> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Deimos"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dione
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dione> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Dione"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth
@@ -789,6 +913,8 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon> ;
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "102.9376819"^^xsd:double ;
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.01671123"^^xsd:double ;
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Inclination> "-1.531E-5"^^xsd:double ;
@@ -804,6 +930,123 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle> "Earth"^^xsd:string .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Enceladus
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Enceladus> rdf:type owl:NamedIndividual ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                         <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Enceladus"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Epimetheus
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Epimetheus> rdf:type owl:NamedIndividual ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Epimetheus"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Europa
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Europa> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Europa"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#First_Planet
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#First_Planet> rdf:type owl:NamedIndividual ,
+                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#item> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mercury> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#next> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ordered_list> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#index> 1 .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ganymede
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ganymede> rdf:type owl:NamedIndividual ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Ganymede"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Helene
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Helene> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Helene"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Hyperion
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Hyperion> rdf:type owl:NamedIndividual ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Hyperion"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Iapetus
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Iapetus> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Iapetus"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Io
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Io> rdf:type owl:NamedIndividual ,
+                                                                                           <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                           <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                           <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                           <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Io"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Janus
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Janus> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Janus"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> rdf:type owl:NamedIndividual ,
                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
@@ -813,6 +1056,14 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Amalthea> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Andrastea> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Callisto> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Europa> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ganymede> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Io> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Metis> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Thebe> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "14.72847983"^^xsd:double ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.04838624"^^xsd:double ;
@@ -838,6 +1089,8 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> ;
                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Deimos> ,
+                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos> ;
                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "-23.94362959"^^xsd:double ;
                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.0933941"^^xsd:double ;
@@ -879,14 +1132,64 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle> "Mercury_(planet)"^^xsd:string .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Methone
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Methone> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Methone"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Metis
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Metis> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Metis"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mimas
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mimas> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Mimas"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Miranda
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Miranda> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Miranda"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon> rdf:type owl:NamedIndividual ,
                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
-                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Destination> ,
                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ;
-                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> .
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune
@@ -898,6 +1201,8 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Nereid> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Triton> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "44.96476227"^^xsd:double ;
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.00859048"^^xsd:double ;
@@ -914,6 +1219,126 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle> "Neptune"^^xsd:string .
 
 
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Nereid
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Nereid> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Nereid"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Oberon
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Oberon> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Oberon"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pallene
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pallene> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Pallene"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pan
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pan> rdf:type owl:NamedIndividual ,
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Pan"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pandora
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pandora> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Pandora"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Phobos"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phoebe
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phoebe> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Phoebe"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Polyduce
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Polyduce> rdf:type owl:NamedIndividual ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Polyduce"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Prometheus
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Prometheus> rdf:type owl:NamedIndividual ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                          <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Prometheus"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Rhea
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Rhea> rdf:type owl:NamedIndividual ,
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Rhea"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn
 <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> rdf:type owl:NamedIndividual ,
                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
@@ -923,6 +1348,30 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Aegaeon> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Anthe> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Atlas> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Calypso> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Daphins> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dione> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Enceladus> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Epimetheus> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Helene> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Hyperion> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Iapetus> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Janus> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Methone> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mimas> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pallene> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pan> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pandora> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phoebe> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Polyduce> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Prometheus> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Rhea> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Telesto> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Tethis> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titan> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "92.59887831"^^xsd:double ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.05386179"^^xsd:double ;
@@ -939,10 +1388,23 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle> "Saturn"^^xsd:string .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Shuttle
-<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Space_Shuttle> rdf:type owl:NamedIndividual ,
-                                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mission_Role> ;
-                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#roleIncludedIn> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Apollo11> .
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet> rdf:type owl:NamedIndividual ,
+                                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#item> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Venus> ;
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#next> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Third_Planet> ;
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ordered_list> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets> ;
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#previous> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#First_Planet> ;
+                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#index> 2 .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets> rdf:type owl:NamedIndividual ,
+                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#OrderedList> ;
+                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#slot> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#First_Planet> ,
+                                                                                                                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet> ,
+                                                                                                                                                                                        <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Third_Planet> ;
+                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#length> 8 .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun
@@ -950,17 +1412,154 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Star> ;
-                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ,
+                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Aegaeon> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Amalthea> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Andrastea> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Anthe> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ariel> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Atlas> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Callisto> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Calypso> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Daphins> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Deimos> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Dione> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Enceladus> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Epimetheus> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Europa> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ganymede> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Helene> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Hyperion> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Iapetus> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Io> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Janus> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mars> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mercury> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Methone> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Metis> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Mimas> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Miranda> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Nereid> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Oberon> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pallene> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pan> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Pandora> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phobos> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Phoebe> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Polyduce> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Prometheus> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Rhea> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Telesto> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Tethis> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Thebe> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titan> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titania> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Triton> ,
+                                                                                                                                                                             <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Umbriel> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ,
                                                                                                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Venus> ;
+                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ,
+                                                                                                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Moon> ;
                                                                                    <http://purl.org/dc/elements/1.1/description> "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, with internal convective motion that generates a magnetic field via a dynamo process.[20] It is by far the most important source of energy for life on Earth. Its diameter is about 1.39 million kilometers (864,000 miles), or 109 times that of Earth, and its mass is about 330,000 times that of Earth. It accounts for about 99.86% of the total mass of the Solar System.Roughly three quarters of the Sun's mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron." ;
                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikidataCode> "Q525"^^xsd:string ;
                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#wikipediaTitle> "Sun"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Telesto
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Telesto> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Telesto"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Tethis
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Tethis> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Tethis"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Thebe
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Thebe> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Jupiter> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Thebe"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Third_Planet
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Third_Planet> rdf:type owl:NamedIndividual ,
+                                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Slot> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#item> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Earth> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#ordered_list> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planets> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#previous> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Second_Planet> ;
+                                                                                            <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#index> 3 .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titan
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titan> rdf:type owl:NamedIndividual ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                              <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Saturn> ,
+                                                                                                                                                                                  <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                     <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Titan"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titania
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titania> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Titania"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Triton
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Triton> rdf:type owl:NamedIndividual ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                               <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Neptune> ,
+                                                                                                                                                                                   <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Triton"^^xsd:string .
+
+
+###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Umbriel
+<http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Umbriel> rdf:type owl:NamedIndividual ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Astronomical_Object> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Natural_Satellite> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbiter> ,
+                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ,
+                                                                                                                                                                                    <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus> ;
+                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Name> "Umbriel"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Uranus
@@ -972,6 +1571,11 @@ xsd:date rdf:type rdfs:Datatype .
                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Satellite> ,
                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Solar_System_Planet> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Has_Orbit_Center> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
+                                                                                      <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbited_By> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Ariel> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Miranda> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Oberon> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Titania> ,
+                                                                                                                                                                                <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Umbriel> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Orbits_Around> <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Sun> ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Argument_Of_Periapsis> "170.9542763"^^xsd:double ;
                                                                                       <http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Eccentricity> "0.04725744"^^xsd:double ;
