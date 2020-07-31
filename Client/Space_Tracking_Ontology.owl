@@ -177,21 +177,12 @@ xsd:date rdf:type rdfs:Datatype .
                           "Orbits Around"@en .
 
 
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#hasParticipant
-:hasParticipant rdf:type owl:ObjectProperty ;
-                owl:inverseOf :isParticipantIn .
-
-
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isBiggerThan
 :isBiggerThan rdf:type owl:ObjectProperty ;
               owl:inverseOf :isSmallerThan ;
               rdf:type owl:TransitiveProperty ;
               rdfs:domain :Astronomical_Object ;
               rdfs:range :Astronomical_Object .
-
-
-###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isParticipantIn
-:isParticipantIn rdf:type owl:ObjectProperty .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#isSmallerThan
@@ -298,7 +289,7 @@ xsd:date rdf:type rdfs:Datatype .
                    rdfs:range xsd:double ;
                    :physicsSymbol "a"^^xsd:string ;
                    rdfs:comment "The sum of the periapsis and apoapsis distances divided by two."@en ;
-                   rdfs:label "Semimajor Axis"@en .
+                   rdfs:label "Orbital Parameters"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/daniele/ontologies/2020/4/space-tracking-ontology#Radius
